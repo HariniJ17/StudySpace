@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Payment</title>
+</head>
+<body>
+    <h2>Payment for Course ID: {{ course_id }}</h2>
+    <p>User: {{ username }}</p>
+    <p>Email: {{ email }}</p>
+
+    <p><strong>Note:</strong> This is a demo payment page.</p>
+    <button onclick="alert('Payment Successful!')">Pay Now</button>
+
+    <a href="{{ url_for('courses') }}">Back to Courses</a>
+</body>
+</html>

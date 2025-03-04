@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Courses</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='courses.css') }}">
+
+</head>
+<body>
+    <h2>Welcome</h2>
+    
+    
+    <h3>Available Courses</h3>
+    <ul>
+        <li>Machine Learning - <a href="{{ url_for('enroll', course_id=1, course_name='ML') }}">Enroll</a></li>
+        <li>Cloud Computing - <a href="{{ url_for('enroll', course_id=2, course_name='CLOUD COMPUTING') }}">Enroll</a></li>
+        <li>Cyber Security - <a href="{{ url_for('enroll', course_id=3, course_name='CYBERSECURITY') }}">Enroll</a></li>
+    </ul>
+
+    <a href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html>
