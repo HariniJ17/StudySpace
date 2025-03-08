@@ -67,10 +67,10 @@ def create_tables():
     conn.commit()
     conn.close()
 
-# Home Page
+# First Page
 @app.route("/")
-def home():
-    return render_template("home.html")
+def logo():
+    return render_template("logo.html")
 
 # Signup Route
 @app.route("/signup", methods=["GET", "POST"])
