@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Bar with Cards</title>
+    <link rel="stylesheet" href="course.css">
+</head>
+<body>
+    <!-- Include Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<!-- navbar -->
+
+    <nav class="navbar">
+        <div class="logo">STUDY SPACE</div>
+        <ul class="nav-links">
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="/index.html">About</a></li>
+            <li><a href="/course/course.html">Courses</a></li>
+            <li><a href="/contact us/contact.html">Contact-Us</a></li>
+            <li><a href="/game/game.html">MindZone</a></li>
+            <li><a href="#">Profile</a></li>
+        </ul>
+        <div class="menu-toggle">&#9776;</div>
+    </nav>
+
+<div class="search-container">
+    <div class="search-box">
+        <input 
+            type="text" 
+            id="search-bar" 
+            placeholder="Search..." 
+            onkeyup="filterItems()">
+        <i class="fas fa-search search-icon"></i> <!-- Transparent search icon -->
+    </div>
+</div>
+
+    
+    
+    <div class="card-container">
+        <a href="python.html" class="card" data-name="Python">
+            <img src="./photo/py.png" alt="Python">
+            <h3>Python</h3>
+            <p>Learn Python programming from basics to advanced.</p>
+        </a>
+        <a href="web.html" class="card" data-name="Web Development">
+            <img src="./photo/web.png" alt="Web Development">
+            <h3>Web Development</h3>
+            <p>Build modern and responsive websites.</p>
+        </a>
+        <a href="cybersecurity-course.html" class="card" data-name="Cybersecurity">
+            <img src="./photo/cyber.png" alt="Cybersecurity">
+            <h3>Cybersecurity</h3>
+            <p>Protect systems and data from cyber threats.</p>
+        </a>
+        <a href="machine-learning-course.html" class="card" data-name="Machine Learning">
+            <img src="./photo/ml.png" alt="Machine Learning">
+            <h3>Machine Learning</h3>
+            <p>Explore algorithms and build intelligent systems.</p>
+        </a>
+        <a href="ai-course.html" class="card" data-name="Artificial Intelligence">
+            <img src="./photo/ai.png" alt="Artificial Intelligence">
+            <h3>Artificial Intelligence</h3>
+            <p>Dive into AI and create smart applications.</p>
+        </a>
+        <a href="blockchain-course.html" class="card" data-name="Cloud Computing">
+            <img src="./photo/cloud.png" alt="Cloud Computing">
+            <h3>Cloud Computing</h3>
+            <p>Learn the fundamentals of decentralized systems.</p>
+        </a>
+    
+        <a href="c-course.html" class="card" data-name="C">
+            <img src="./photo/c.png" alt="C">
+            <h3>C Programming</h3>
+            <p>Master the fundamentals of C programming.</p>
+        </a>
+        <a href="cplusplus-course.html" class="card" data-name="C++">
+            <img src="./photo/c++.png" alt="C++">
+            <h3>C++ Programming</h3>
+            <p>Learn C++ for efficient and fast coding.</p>
+        </a>
+       
+        
+        <a href="devops-course.html" class="card" data-name="DevOps">
+            <img src="./photo/develops.png" alt="DevOps">
+            <h3>DevOps</h3>
+            <p>Streamline development and operations.</p>
+        </a>
+        <a href="data-science-course.html" class="card" data-name="Data Science">
+            <img src="./photo/data sci.png" alt="Data Science">
+            <h3>Data Science</h3>
+            <p>Analyze data and extract meaningful insights.</p>
+        </a>
+        
+        <a href="docker-course.html" class="card" data-name="Deep Learning">
+            <img src="./photo/deep.png" alt="Deep Learning">
+            <h3>Deep Learning</h3>
+            <p>Learn containerization and simplify deployment.</p>
+        </a>
+        <a href="cloud-computing-course.html" class="card" data-name="Cloud Computing">
+            <img src="./photo/digital.png" alt="Cloud Computing">
+            <h3>Digital Marketing</h3>
+            <p>Understand cloud services and architecture.</p>
+        </a>
+        <a href="flutter-course.html" class="card" data-name="Data Structure">
+            <img src="./photo/data stru.png" alt="Flutter">
+            <h3>Data Structure</h3>
+            <p>Build cross-platform mobile applications.</p>
+        </a>
+        <a href="javascript-course.html" class="card" data-name="Data Matrix">
+            <img src="./photo/data mar.png" alt="JavaScript">
+            <h3>Data Matrix</h3>
+            <p>Learn the core language for web development.</p>
+        </a>
+        <a href="java-course.html" class="card" data-name="Data Analysis">
+            <img src="./photo/data ana.png" alt="Data Analysis">
+            <h3>Data Analysis</h3>
+            <p>Master the essentials of object-oriented programming.</p>
+        </a>
+        <a href="go-course.html" class="card" data-name="Chemistry">
+            <img src="./photo/che.png" alt="Chemistry">
+            <h3>Chemistry</h3>
+            <p>Learn the Go programming language for concurrency.</p>
+        </a>
+        <a href="ruby-course.html" class="card" data-name="Maths">
+            <img src="./photo/maths.png" alt="Maths">
+            <h3>Maths</h3>
+            <p>Discover the beauty of Ruby programming.</p>
+        </a>
+        <a href="swift-course.html" class="card" data-name="English-Gammer">
+            <img src="./photo/english.png" alt="English-Gammer">
+            <h3>English-Gammer</h3>
+            <p>Learn Swift to build iOS applications.</p>
+        </a>
+        <a href="kotlin-course.html" class="card" data-name="Mircosoft-Excel">
+            <img src="./photo/excel.png" alt="Mircosoft-Excel">
+            <h3>Mircosoft-Excel</h3>
+            <p>Build modern apps with Kotlin for Android development.</p>
+        </a>
+        <a href="sql-course.html" class="card" data-name="VB.net">
+            <img src="./photo/vb.png" alt="VB.net">
+            <h3>VB.net</h3>
+            <p>Learn SQL for managing databases effectively.</p>
+        </a>
+        <a href="sql-course.html" class="card" data-name="VB.net">
+            <img src="./photo/java.png" alt="VB.net">
+            <h3>Java</h3>
+            <p>Learn SQL for managing databases effectively.</p>
+        </a>
+    </div>
+
+    <script src="course.js"></script>
+    
+
+</body>
+</html>

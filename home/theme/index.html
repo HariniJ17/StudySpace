@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Mode with Toggle Bar</title>
+    <link id="theme-style" rel="stylesheet" href="light.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: inherit;
+    font-size: 18px;
+}
+
+.content {
+    text-align: center;
+    margin-top: 50px;
+}
+
+</style>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">My Website</div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+            <li>
+                <button id="toggle-theme">🌙</button>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <h1>Welcome to Dark Mode Toggle</h1>
+        <p>Click the moon icon to switch themes.</p>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

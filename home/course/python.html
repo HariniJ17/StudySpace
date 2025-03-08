@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Python Basic-Adavance</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      /* background-color: #831238; */
+    }
+    /* content */
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #831238;
+      color: white;
+      padding: 10px 20px;
+    }
+
+    .navbar h1 {
+      margin: 0;
+    }
+
+    .navbar nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    .navbar nav a:hover {
+      text-decoration: underline;
+    }
+
+    .course-info {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .enroll-btn {
+      background-color: #831238;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .enroll-btn:hover {
+      background-color: #831238;
+    }
+
+    .course-details {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+      padding: 20px;
+      background-color: #f9f9f9;
+    }
+
+    .course-details div {
+      text-align: center;
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 5px;
+    }
+
+    .course-details h3 {
+      margin: 0;
+      color: #333;
+    }
+
+    .course-details p {
+      color: #555;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 20px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    .faq-section {
+      margin-top: 30px;
+    }
+
+    .faq-item {
+      margin-bottom: 10px;
+    }
+
+    .faq-item button {
+      width: 100%;
+      background: #f1f1f1;
+      color: #333;
+      padding: 10px;
+      border: none;
+      text-align: left;
+      cursor: pointer;
+      font-size: 16px;
+      outline: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .faq-item button:hover {
+      background: #ddd;
+    }
+
+    .faq-item .content {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 10px;
+      background: #f9f9f9;
+      border-left: 3px solid #831238;
+      margin-top: 5px;
+      transition: max-height 0.5s ease, padding 0.3s ease;
+      border-radius: 5px;
+    }
+
+    .faq-item .content.open {
+      max-height: 200px;
+      padding: 10px;
+    }
+
+    .reviews {
+      margin-top: 30px;
+      position: relative;
+    }
+
+    .carousel-wrapper {
+      overflow: hidden;
+      width: 100%;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+
+    .carousel {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      width: calc(100% * 4);
+    }
+
+    .carousel-item {
+      flex: 0 0 100%;
+      padding: 20px;
+      text-align: center;
+      box-sizing: border-box;
+    }
+
+    .carousel-item:nth-child(odd) {
+      background-color: #f0f0f0;
+    }
+
+    .carousel-item:nth-child(even) {
+      background-color: #e8f5e9;
+    }
+
+    .carousel-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+
+    .carousel-buttons button {
+      padding: 10px 20px;
+      background: #831238;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .carousel-buttons button:hover {
+      background: #831238;
+    }
+
+    #slide-indicator {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .enroll-btn {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      background: #831238;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      text-align: center;
+      font-size: 18px;
+      margin-top: 30px;
+      cursor: pointer;
+    }
+
+    .enroll-btn:hover {
+      background: #831238;
+    }
+
+    .enroll-message {
+      display: none;
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #f3eef5;
+      color: #333;
+      border-left: 5px solid #831238;
+    }
+
+    .module-section {
+      margin-top: 20px;
+    }
+
+    .module {
+      margin-bottom: 15px;
+      padding: 15px;
+      background: #f1f1f1;
+      border-radius: 8px;
+    }
+
+    .module h3 {
+      margin: 0;
+      color: #831238;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .module h3::after {
+      content: "+";
+      font-size: 18px;
+      transition: transform 0.3s ease;
+    }
+
+    .module h3.open::after {
+      transform: rotate(45deg);
+    }
+
+    .module-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease, padding 0.3s ease;
+      padding: 0 10px;
+      background: white;
+      border-left: 3px solid #831238;
+      border-radius: 4px;
+    }
+
+    .module-content.open {
+      max-height: 200px;
+      padding: 10px;
+    }
+
+    .learn-section {
+      margin-top: 40px;
+      padding: 20px;
+      color: black;
+      border-radius: 8px;
+    }
+
+    .learn-section h3 {
+      font-size: 20px;
+      margin-bottom: 15px;
+      color: #831238;
+    }
+
+    .learn-section ul {
+      list-style: disc inside;
+      margin: 0;
+      padding: 0;
+    }
+
+    .learn-section ul li {
+      margin-bottom: 10px;
+      padding: 5px 0;
+    }
+
+    .learn-section ul li::marker {
+      color: black;
+    }
+
+  </style>
+</head>
+<body>
+  <!-- content -->
+  <header>
+    <div class="navbar">
+      <h1>Study Space</h1>
+      <nav>
+        <a href="#">Home</a>
+        <a href="#">About </a>
+        <a href="#">Contract Us</a>
+        <a href="#">Courses</a>
+        <a href="#">MindZone</a>
+        <a href="#">Profile</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="course-info">
+      <h2>Learn Python Basic</h2>
+      <p><strong>Instructors:</strong> James Gibbons</p>
+      <p>Starts Jan 15</p>
+      <p>39,068 already enrolled</p>
+    </section>
+    <section class="course-details">
+      <div class="module">
+        <h3>5 modules</h3>
+        <p>Gain insight into a topic and learn the fundamentals.</p>
+      </div>
+      <div class="rating">
+        <h3>4.7 ★</h3>
+        <p>(3,105 reviews)</p>
+      </div>
+      <div class="time">
+        <h3>8 hours to complete</h3>
+        <p>3 weeks at 2 hours a week</p>
+      </div>
+      <div class="flexible">
+        <h3>Flexible schedule</h3>
+        <p>Learn at your own pace</p>
+      </div>
+      <div class="feedback">
+        <h3>98%</h3>
+        <p>Most learners liked this course</p>
+      </div>
+    </section>
+  </main>
+
+  <div class="container">
+    <h2>Course Modules</h2>
+    <div class="module-section">
+      <!-- Module 1 -->
+      <div class="module">
+        <h3 onclick="toggleModule(this)">Module 1: Introduction to Python</h3>
+        <div class="module-content">
+          <ul>
+            <li>What is Python?</li>
+            <li>Setting up the environment</li>
+            <li>First Python program</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Module 2 -->
+      <div class="module">
+        <h3 onclick="toggleModule(this)">Module 2: Python Basics</h3>
+        <div class="module-content">
+          <ul>
+            <li>Variables and Data Types</li>
+            <li>Control Flow: If-Else and Loops</li>
+            <li>Functions and Modules</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Module 3 -->
+      <div class="module">
+        <h3 onclick="toggleModule(this)">Module 3: Advanced Topics</h3>
+        <div class="module-content">
+          <ul>
+            <li>Object-Oriented Programming</li>
+            <li>Error Handling</li>
+            <li>Working with Libraries</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- What You Will Learn Section -->
+    <div class="learn-section">
+      <h3>What You Will Learn in Study Space</h3>
+      <ul>
+        <li>Master the basics of programming with Python.</li>
+        <li>Understand advanced concepts such as OOP and error handling.</li>
+        <li>Build real-world projects to showcase your skills.</li>
+        <li>Learn how to work with external libraries and modules.</li>
+      </ul>
+    </div>
+
+    <!-- Enroll Button -->
+    <button class="enroll-btn" onclick="showPopup()">Enroll Now</button>
+
+    <!-- Enroll Message -->
+    <div id="enrollMessage" class="enroll-message">You have successfully enrolled!</div>
+  </div>
+
+  <script>
+    // Toggle module content visibility
+    function toggleModule(module) {
+      const content = module.nextElementSibling;
+      content.classList.toggle("open");
+      module.classList.toggle("open");
+    }
+
+    // Enroll Button Functionality
+    function showPopup() {
+      // Show a confirmation popup
+      if (confirm("Are you sure you want to enroll in this course?")) {
+        enroll();
+      }
+    }
+
+    function enroll() {
+      const enrollButton = document.querySelector(".enroll-btn");
+      
+      // Change the button text and style
+      enrollButton.textContent = "Enrolled";
+      enrollButton.style.backgroundColor = "#831238"; // Change the background color
+      enrollButton.style.cursor = "not-allowed"; // Disable clicking
+      enrollButton.disabled = true; // Disable the button
+      
+      document.getElementById("enrollMessage").style.display = "block";
+    }
+  </script>
+</body>
+</html>

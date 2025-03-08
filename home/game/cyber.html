@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cybersecurity Password Guessing Game</title>
+  <style>
+    /* General Styling */
+    body {
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 36px;
+      color: #831238;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    /* Game Container */
+    .game-container {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      max-width: 450px;
+      margin-top: 20px;
+    }
+
+    /* Input Field */
+    input {
+      padding: 12px;
+      font-size: 16px;
+      width: 80%;
+      border: 2px solid #831238;
+      border-radius: 8px;
+      text-align: center;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    input:focus {
+      border-color: #631026;
+      box-shadow: 0 0 8px rgba(131, 18, 56, 0.5);
+    }
+
+    /* Button */
+    button {
+      padding: 12px 24px;
+      font-size: 18px;
+      margin-top: 10px;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      background: #831238;
+      color: white;
+      font-weight: bold;
+      transition: 0.3s;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    button:hover {
+      background: #631026;
+      transform: scale(1.05);
+    }
+
+    /* Feedback Message */
+    #feedback {
+      font-size: 20px;
+      margin-top: 15px;
+      font-weight: bold;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .success {
+      color: #2ecc71;
+      opacity: 1;
+    }
+
+    .failure {
+      color: #e74c3c;
+      opacity: 1;
+    }
+
+    /* Score Styling */
+    #score-container {
+      font-size: 22px;
+      font-weight: bold;
+      margin-top: 20px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      display: inline-block;
+      color: #fff;
+      background: #831238;
+    }
+
+    /* Hint Section */
+    #hint {
+      font-size: 18px;
+      font-weight: bold;
+      color: #831238;
+    }
+
+  </style>
+</head>
+<body>
+  <h1>Cybersecurity Password Guessing Game</h1>
+  <div class="game-container">
+    <p>Your goal is to guess the secret password.</p>
+    <p>Initial Hint: <span id="initialHint"></span></p>
+
+    <label for="passwordGuess">Enter your guess: </label>
+    <input type="text" id="passwordGuess" maxlength="10" placeholder="Password (max 10 chars)" />
+    <button onclick="checkGuess()">Submit Guess</button>
+
+    <p id="feedback"></p>
+    <p>Attempts Left: <span id="attempts">5</span></p>
+    <p>Hint: <span id="hint"></span></p>
+  </div>
+
+  <script>
+    // The secret password to guess (hidden from the user)
+    const secretPassword = "cyber123";
+    let attemptsLeft = 5;
+
+    // Function to generate hint based on the current guess
+    function generateHint(userGuess) {
+      let hint = "";
+      for (let i = 0; i < secretPassword.length; i++) {
+        if (userGuess[i] === secretPassword[i]) {
+          hint += userGuess[i];  // Correct character at this position
+        } else {
+          hint += "_";  // Incorrect character, show underscore
+        }
+      }
+      return hint;
+    }
+
+    // Function to generate the initial hint (show some characters upfront)
+    function generateInitialHint() {
+      let initialHint = "";
+      // Show the first 3 characters of the password as the initial hint
+      for (let i = 0; i < secretPassword.length; i++) {
+        if (i < 3) {
+          initialHint += secretPassword[i];  // Reveal first 3 characters
+        } else {
+          initialHint += "_";  // Hide the rest
+        }
+      }
+      return initialHint;
+    }
+
+    // Function to check the password guess
+    function checkGuess() {
+      const userGuess = document.getElementById("passwordGuess").value;
+      const feedbackElement = document.getElementById("feedback");
+      const attemptsElement = document.getElementById("attempts");
+      const hintElement = document.getElementById("hint");
+
+      if (userGuess === secretPassword) {
+        feedbackElement.textContent = "Correct! You've cracked the password!";
+        feedbackElement.className = "success";
+        attemptsElement.textContent = "You won!";
+        document.getElementById("passwordGuess").disabled = true;
+      } else {
+        attemptsLeft--;
+        attemptsElement.textContent = attemptsLeft;
+
+        // Provide a hint after each incorrect guess
+        hintElement.textContent = generateHint(userGuess);
+
+        if (attemptsLeft === 0) {
+          feedbackElement.textContent = `Game Over! The correct password was "${secretPassword}".`;
+          feedbackElement.className = "failure";
+          document.getElementById("passwordGuess").disabled = true;
+        } else {
+          feedbackElement.textContent = "Incorrect guess, try again!";
+          feedbackElement.className = "failure";
+        }
+      }
+
+      // Clear the input field after each attempt
+      document.getElementById("passwordGuess").value = '';
+    }
+
+    // Initialize the game by showing the initial hint
+    document.getElementById("initialHint").textContent = generateInitialHint();
+  </script>
+</body>
+</html>
