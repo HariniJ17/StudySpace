@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate Download</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        #certificate {
+            width: 80%;
+            margin: 20px auto;
+            border: 2px solid rgba(131, 18, 56, 1);
+            padding: 20px;
+            text-align: center;
+            display: none; /* Initially hidden */
+        }
+        button {
+            padding: 10px 20px;
+            background-color: rgba(131, 18, 56, 1);
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: rgb(148, 41, 77);
+        }
+
+        #logo {
+            display: block;
+            margin: 20px auto;
+            width: 150px; /* Adjust width */
+            height: auto; /* Maintain aspect ratio */
+        }
+
+        .signature {
+            position: absolute;
+            bottom: -200px; /* Adjusted to place the signature lower */
+            width: 150px; /* Adjust size */
+            height: auto; /* Maintain aspect ratio */
+        }
+        #signature1 {
+            left: 15%; /* Position signature1 to the left */
+        }
+        #signature2 {
+            right: 15%; /* Position signature2 to the right */
+        }
+    </style>
+</head>
+<body>
+    <h1>Download Your Certificate</h1>
+    <input type="text" id="userNameInput" placeholder="Enter your name"><br> <br>
+    <label>Course Name: <strong>Python Basics</strong></label><br> <br>
+    <button id="generateCertificate">Generate Certificate</button>
+    <button id="downloadBtn" style="display: none;">Download Certificate</button>
+
+    <!-- Certificate Template -->
+    <div id="certificate">
+        <img id="logo" src="logo.ico" alt="Logo">
+        <h2>Certificate of Completion</h2>
+        <p>This certificate is provided to </p>
+        <h3 id="userName">[Your Name]</h3>
+        <p>for successfully completing the course of </p>
+        <h4 id="courseName">Python Basics</h4>
+        <p>Date: <span id="date">[Date]</span></p>
+    
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+        document.getElementById('generateCertificate').addEventListener('click', () => {
+            const userName = document.getElementById('userNameInput').value;
+
+            if (!userName) {
+                alert("Please enter your name!");
+                return;
+            }
+
+            const date = new Date().toLocaleDateString();
+
+            // Dynamically update the certificate content
+            document.getElementById('userName').textContent = userName;
+            document.getElementById('date').textContent = date;
+
+            // Display the certificate and download button
+            document.getElementById('certificate').style.display = 'block';
+            document.getElementById('downloadBtn').style.display = 'inline-block';
+        });
+
+        document.getElementById('downloadBtn').addEventListener('click', () => {
+            const certificateElement = document.getElementById('certificate');
+            html2canvas(certificateElement).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'certificate.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vocabulary Builder Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f4f7;
+        }
+        .game-container {
+            text-align: center;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            border: 3px solid #831238;
+        }
+        .definition {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            color: #831238;
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: 90%;
+            font-size: 1em;
+            margin: 10px auto;
+            border: 2px solid #831238;
+            border-radius: 4px;
+            text-align: center;
+            display: block;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #831238;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        .result {
+            font-size: 1.2em;
+            margin-top: 20px;
+            color: #831238;
+        }
+        .score {
+            font-size: 1.5em;
+            color: #831238;
+        }
+    </style>
+</head>
+<body>
+
+<div class="game-container">
+    <h2 style="color: #831238;">Vocabulary Builder Game</h2>
+    <div class="definition" id="definition"></div>
+    <input type="text" id="answer" placeholder="Enter your guess here">
+    <button id="checkButton">Check Answer</button>
+    <div class="result" id="result"></div>
+    <div class="score" id="score">Score: 0</div>
+</div>
+
+<script>
+    const words = [
+        { word: "photosynthesis", definition: "The process by which green plants and some other organisms use sunlight to synthesize foods from carbon dioxide and water." },
+        { word: "mitosis", definition: "A process of cell division that results in two genetically identical daughter cells." },
+        { word: "gravity", definition: "The force that attracts a body toward the center of the earth, or toward any other physical body having mass." },
+        { word: "ecosystem", definition: "A biological community of interacting organisms and their physical environment." },
+        { word: "photosphere", definition: "The luminous envelope of a star from which its light and heat radiate." }
+    ];
+
+    let currentWordIndex = 0;
+    let score = 0;
+
+    const definitionElement = document.getElementById("definition");
+    const answerInput = document.getElementById("answer");
+    const checkButton = document.getElementById("checkButton");
+    const resultElement = document.getElementById("result");
+    const scoreElement = document.getElementById("score");
+
+    function displayDefinition() {
+        definitionElement.textContent = words[currentWordIndex].definition;
+    }
+
+    function checkAnswer() {
+        const userAnswer = answerInput.value.trim().toLowerCase();
+        const correctAnswer = words[currentWordIndex].word.toLowerCase();
+
+        if (userAnswer === correctAnswer) {
+            score++;
+            resultElement.textContent = "Correct! Well done!";
+        } else {
+            resultElement.textContent = `Incorrect! The correct answer is: ${words[currentWordIndex].word}`;
+        }
+
+        scoreElement.textContent = `Score: ${score}`;
+        answerInput.value = ""; // Clear the input for next guess
+
+        // Move to the next word after a delay
+        currentWordIndex = (currentWordIndex + 1) % words.length;
+        setTimeout(() => {
+            displayDefinition();
+            resultElement.textContent = "";
+        }, 1500); // Display result for 1.5 seconds before showing next definition
+    }
+
+    // Initialize the first definition
+    displayDefinition();
+
+    // Attach event listener to the button
+    checkButton.addEventListener("click", checkAnswer);
+
+    // Optionally, you could allow users to press "Enter" to submit their answer
+    answerInput.addEventListener("keypress", function (e) {
+        if (e.key === "Enter") {
+            checkAnswer();
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- study space in navbar -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+15&display=swap" rel="stylesheet">
+    <!--full font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Jersey+15&family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/game.css') }}">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand">Study Space</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}#about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('courses') }}">Courses</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('contact') }}">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('game') }}">MindZone</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('profile') }}">Profile</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+    <div class="card-container">
+        <div class="card">
+          <!-- <img src="https://via.placeholder.com/300" alt="Card Image" class="card-img"> -->
+          <div class="card-content">
+            <h2 class="card-title">Cyber Security</h2>
+            <p class="card-text">It is teh game about cyber Security</p>
+            <a href="{{ url_for('cyber') }}" class="card-button">Start Play</a>
+          </div>
+        </div>
+        <div class="card">
+          <!-- <img src="https://via.placeholder.com/300" alt="Card Image" class="card-img"> -->
+          <div class="card-content">
+            <h2 class="card-title">Memory Card</h2>
+            <p class="card-text">It is the game about memory card</p>
+            <a href="{{ url_for('memory') }}" class="card-button">Start Play</a>
+          </div>
+        </div>
+        <div class="card">
+          <!-- <img src="https://via.placeholder.com/300" alt="Card Image" class="card-img"> -->
+          <div class="card-content">
+            <h2 class="card-title">Word Scramble</h2>
+            <p class="card-text">It is the game about word Scramble</p>
+            <a href="{{ url_for('word') }}" class="card-button">Start Play</a>
+          </div>
+        </div>
+        <div class="card">
+          <!-- <img src="https://via.placeholder.com/300" alt="Card Image" class="card-img"> -->
+          <div class="card-content">
+            <h2 class="card-title">Tech Trivia Game</h2>
+            <p class="card-text">It is the game about finding the correct word</p>
+            <a href="{{ url_for('tech') }}" class="card-button">Start Play</a>
+          </div>
+        </div>
+        <div class="card">
+          <!-- <img src="https://via.placeholder.com/300" alt="Card Image" class="card-img"> -->
+          <div class="card-content">
+            <h2 class="card-title">Math Solver Race</h2>
+            <p class="card-text">It is teh game about Math Solver Race</p>
+            <a href="{{ url_for('maths') }}" class="card-button">Start Play</a>
+          </div>
+        </div>
+        <div class="card">
+          <!-- <img src="https://via.placeholder.com/300" alt="Card Image" class="card-img"> -->
+          <div class="card-content">
+            <h2 class="card-title">Fraction Frenzy Game</h2>
+            <p class="card-text">It is the game about Fraction Frenzy Game</p>
+            <a href="{{ url_for('fraction') }}" class="card-button">Start Play</a>
+          </div>
+        </div>
+        <div class="card">
+          <!-- <img src="https://via.placeholder.com/300" alt="Card Image" class="card-img"> -->
+          <div class="card-content">
+            <h2 class="card-title">pH Adventure</h2>
+            <p class="card-text">It is the game about finding the pH Adventure</p>
+            <a href="{{ url_for('chemistry') }}" class="card-button">Start Play</a>
+          </div>
+        </div>
+        <div class="card">
+          <!-- <img src="https://via.placeholder.com/300" alt="Card Image" class="card-img"> -->
+          <div class="card-content">
+            <h2 class="card-title">Grammar Ninja Game</h2>
+            <p class="card-text">It is teh game about Grammar Ninja Game</p>
+            <a href="{{ url_for('grammar') }}" class="card-button">Start Play</a>
+          </div>
+        </div>
+        <div class="card">
+          <!-- <img src="https://via.placeholder.com/300" alt="Card Image" class="card-img"> -->
+          <div class="card-content">
+            <h2 class="card-title">Vocabulary Builder Game</h2>
+            <p class="card-text">It is the game about Vocabulary Builder Game</p>
+            <a href="{{ url_for('vocubalary') }}" class="card-button">Start Play</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="text-center py-3" style="background-color: #831238;">
+      <p>&copy; 2025 Study Space. All Rights Reserved. | <a href="privacy.html">Privacy Policy</a></p>
+  </footer>
+</body>
+</html>

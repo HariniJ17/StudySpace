@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .quiz-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: rgba(131, 18, 56, 1);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: rgb(154, 40, 78);
+        }
+
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        #result {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="quiz-container">
+        <h2>Quiz: Python Basics</h2>
+        <form id="quizForm">
+            <div class="question">
+                <p>1. What is the correct file extension for Python files?</p>
+                <label>
+                    <input type="radio" name="q1" value="a"> .py
+                </label>
+                <label>
+                    <input type="radio" name="q1" value="b"> .python
+                </label>
+                <label>
+                    <input type="radio" name="q1" value="c"> .pty
+                </label>
+            </div>
+
+            <div class="question">
+                <p>2. How do you create a variable in Python?</p>
+                <label>
+                    <input type="radio" name="q2" value="a"> var x = 10
+                </label>
+                <label>
+                    <input type="radio" name="q2" value="b">
+                    x = 10 </label>
+                <label>
+                    <input type="radio" name="q2" value="c"> 9x = 10
+                </label>
+            </div>
+
+            <div class="question">
+                <p>3. Which keyword is used to define a function in Python?</p>
+                <label>
+                    <input type="radio" name="q3" value="a"> def
+                </label>
+                <label>
+                    <input type="radio" name="q3" value="b"> function
+                </label>
+                <label>
+                    <input type="radio" name="q3" value="c"> fun
+                </label>
+            </div>
+
+            <button type="button" onclick="checkAnswers()">Submit</button>
+        </form>
+
+        <div id="result"></div>
+        <a href="/certificate/certificate.html"><button id="certificateButton" disabled>Get Certificate</button></a>
+    </div>
+
+    <script>
+        function checkAnswers() {
+            const quizForm = document.getElementById("quizForm");
+            let score = 0;
+
+            // Answer Key
+            const answers = {
+                q1: "a", // Correct answer for question 1
+                q2: "b", // Correct answer for question 2
+                q3: "a", // Correct answer for question 3
+            };
+
+            // Check answers
+            for (let i = 1; i <= 3; i++) {
+                const question = `q${i}`; // Correctly format the question key
+                const selectedAnswer = quizForm.querySelector(`input[name="${question}"]:checked`); // Fix querySelector syntax
+
+                if (selectedAnswer && selectedAnswer.value === answers[question]) {
+                    score++;
+                }
+            }
+
+            // Display result
+            const result = document.getElementById("result");
+            result.textContent = `You scored ${score} out of 3`;
+
+            // Enable certificate button only if all answers are completed
+            const allAnswered = Object.keys(answers).every(question => {
+                return quizForm.querySelector(`input[name="${question}"]:checked`);
+            });
+
+            if (allAnswered) {
+                document.getElementById("certificateButton").disabled = false;
+            } else {
+                alert("Please answer all questions before getting the certificate.");
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Scramble Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .game-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            border: 3px solid #831238;
+        }
+
+        .scrambled-word {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #831238;
+        }
+
+        .input-box {
+            padding: 10px;
+            font-size: 16px;
+            width: 200px;
+            border-radius: 4px;
+            border: 2px solid #831238;
+            text-align: center;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #831238;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background-color: #6b0f2a;
+        }
+
+        .message {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="game-container">
+    <h1 style="color: #831238;">Word Scramble Game</h1>
+    <div id="scrambled-word" class="scrambled-word"></div>
+    <input type="text" id="user-input" class="input-box" placeholder="Guess the word">
+    <br>
+    <button class="btn" onclick="checkAnswer()">Submit</button>
+    <div id="message" class="message"></div>
+</div>
+
+<script>
+    const words = ["algorithm", "compiler", "binary", "debugging", "encryption", "network", "server", "software", "hardware", "firewall"];
+    let currentWord = words[Math.floor(Math.random() * words.length)];
+    let scrambledWord = scrambleWord(currentWord);
+    
+    document.getElementById("scrambled-word").textContent = scrambledWord;
+
+    function scrambleWord(word) {
+        const wordArray = word.split("");
+        for (let i = wordArray.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [wordArray[i], wordArray[j]] = [wordArray[j], wordArray[i]];
+        }
+        return wordArray.join("");
+    }
+
+    function checkAnswer() {
+        const userInput = document.getElementById("user-input").value.toLowerCase().trim();
+        const messageElement = document.getElementById("message");
+
+        if (userInput === currentWord) {
+            messageElement.textContent = "Correct! Well done!";
+            messageElement.style.color = "green";
+            setTimeout(startNewRound, 2000);
+        } else {
+            messageElement.textContent = "Oops! Try again.";
+            messageElement.style.color = "red";
+        }
+    }
+
+    function startNewRound() {
+        currentWord = words[Math.floor(Math.random() * words.length)];
+        scrambledWord = scrambleWord(currentWord);
+        document.getElementById("scrambled-word").textContent = scrambledWord;
+        document.getElementById("user-input").value = "";
+        document.getElementById("message").textContent = "";
+    }
+</script>
+
+</body>
+</html>

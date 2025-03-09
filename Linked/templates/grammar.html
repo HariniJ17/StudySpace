@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grammar Ninja Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f0f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #game-container {
+            width: 80%;
+            max-width: 600px;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 15px rgba(131, 18, 56, 0.3);
+            border-radius: 12px;
+            text-align: center;
+            border-top: 6px solid #831238;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #831238;
+            margin-bottom: 20px;
+        }
+
+        #sentence-container {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #831238;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 2px dashed #831238;
+            border-radius: 8px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 80%;
+            font-size: 1rem;
+            margin-top: 10px;
+            border: 2px solid #831238;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            margin-top: 10px;
+            background-color: #831238;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #a31846;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        #next-btn {
+            background-color: #2196f3;
+        }
+
+        #next-btn:hover {
+            background-color: #1976d2;
+        }
+
+        #reset-btn {
+            margin-top: 20px;
+            background-color: #f44336;
+        }
+
+        #reset-btn:hover {
+            background-color: #e53935;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <h1>Grammar Ninja Game</h1>
+        <div id="sentence-container">
+            <p id="sentence"></p>
+        </div>
+        <input type="text" id="user-answer" placeholder="Type your answer here">
+        <button id="submit-btn">Submit Answer</button>
+        <div id="result"></div>
+        <button id="next-btn" style="display:none;">Next Question</button>
+        <button id="reset-btn">Reset Game</button>
+    </div>
+
+    <script>
+        let currentQuestion = {};
+        let score = 0;
+
+        const questions = [
+            { sentence: "The quick ___ fox jumps over the lazy dog.", answer: "brown" },
+            { sentence: "She ___ to the store yesterday.", answer: "went" },
+            { sentence: "I have ___ apples than you.", answer: "more" },
+            { sentence: "He ___ playing basketball when it started raining.", answer: "was" },
+            { sentence: "We ___ go to the park tomorrow.", answer: "will" }
+        ];
+
+        function generateQuestion() {
+            const randomIndex = Math.floor(Math.random() * questions.length);
+            currentQuestion = questions[randomIndex];
+            document.getElementById('sentence').textContent = currentQuestion.sentence;
+            document.getElementById('user-answer').value = '';
+            document.getElementById('result').textContent = '';
+            document.getElementById('next-btn').style.display = 'none';
+        }
+
+        function checkAnswer() {
+            const userAnswer = document.getElementById('user-answer').value.trim().toLowerCase();
+            const result = document.getElementById('result');
+            
+            if (userAnswer === currentQuestion.answer.toLowerCase()) {
+                result.textContent = "Correct! Well done.";
+                result.style.color = 'green';
+                score++;
+            } else {
+                result.textContent = `Incorrect. The correct answer is: ${currentQuestion.answer}`;
+                result.style.color = 'red';
+            }
+            document.getElementById('next-btn').style.display = 'inline-block';
+        }
+
+        document.getElementById('next-btn').addEventListener('click', generateQuestion);
+        document.getElementById('reset-btn').addEventListener('click', function() {
+            score = 0;
+            generateQuestion();
+            document.getElementById('result').textContent = '';
+            document.getElementById('next-btn').style.display = 'none';
+        });
+
+        generateQuestion();
+        document.getElementById('submit-btn').addEventListener('click', checkAnswer);
+        document.getElementById('user-answer').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                checkAnswer();
+            }
+        });
+    </script>
+</body>
+</html>

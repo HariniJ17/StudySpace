@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>pH Adventure</title>
+  <style>
+    /* General Styling */
+    body {
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 40px;
+      color: #831238;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    /* Game Container */
+    .game-container {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      max-width: 400px;
+      margin-top: 20px;
+    }
+
+    /* Substance Display */
+    .substance {
+      font-size: 28px;
+      font-weight: bold;
+      background: rgba(131, 18, 56, 0.1);
+      padding: 15px 25px;
+      border-radius: 8px;
+      color: #831238;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+
+    /* Buttons */
+    .buttons button {
+      padding: 12px 24px;
+      font-size: 18px;
+      margin: 10px;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      transition: 0.3s ease-in-out;
+      font-weight: bold;
+      color: white;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Button Colors */
+    .buttons button:nth-child(1) { background: #d32f2f; } /* Acid - Dark Red */
+    .buttons button:nth-child(2) { background: #fbc02d; color: #000; } /* Neutral - Yellow */
+    .buttons button:nth-child(3) { background: #1976d2; } /* Base - Deep Blue */
+
+    /* Hover Effects */
+    .buttons button:hover {
+      opacity: 0.85;
+      transform: scale(1.05);
+    }
+
+    /* Feedback Message */
+    #feedback {
+      font-size: 22px;
+      margin-top: 15px;
+      font-weight: bold;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .correct {
+      color: #2ecc71;
+      opacity: 1;
+    }
+
+    .incorrect {
+      color: #e74c3c;
+      opacity: 1;
+    }
+
+    /* Score Styling */
+    #score-container {
+      font-size: 22px;
+      font-weight: bold;
+      margin-top: 20px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      display: inline-block;
+      color: #fff;
+      background: #831238;
+    }
+  </style>
+</head>
+<body>
+  <h1>pH Adventure</h1>
+  <div class="game-container">
+    <div class="substance">Substance: <span id="substance-name">Water</span></div>
+    <div class="buttons">
+      <button onclick="checkAnswer('acid')">Acid</button>
+      <button onclick="checkAnswer('neutral')">Neutral</button>
+      <button onclick="checkAnswer('base')">Base</button>
+    </div>
+    <div id="feedback"></div>
+    <div id="score-container">Score: <span id="score">0</span></div>
+  </div>
+
+  <script>
+    const substances = [
+      { name: "Water", pH: 7, type: "neutral" },
+      { name: "Lemon Juice", pH: 2, type: "acid" },
+      { name: "Bleach", pH: 12, type: "base" },
+      { name: "Vinegar", pH: 3, type: "acid" },
+      { name: "Soap", pH: 9, type: "base" }
+    ];
+
+    let score = 0;
+    let currentSubstance;
+
+    function getRandomSubstance() {
+      const randomIndex = Math.floor(Math.random() * substances.length);
+      return substances[randomIndex];
+    }
+
+    function displaySubstance() {
+      currentSubstance = getRandomSubstance();
+      document.getElementById("substance-name").textContent = currentSubstance.name;
+    }
+
+    function checkAnswer(answer) {
+      const feedback = document.getElementById("feedback");
+      if (answer === currentSubstance.type) {
+        feedback.textContent = "Correct!";
+        feedback.className = "correct";
+        score++;
+      } else {
+        feedback.textContent = "Incorrect!";
+        feedback.className = "incorrect";
+      }
+      document.getElementById("score").textContent = score;
+      feedback.style.opacity = "1";
+
+      setTimeout(() => {
+        feedback.style.opacity = "0";
+        displaySubstance();
+      }, 1000);
+    }
+
+    // Initialize game
+    displaySubstance();
+  </script>
+</body>
+</html>
