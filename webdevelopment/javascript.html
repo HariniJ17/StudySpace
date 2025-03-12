@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+    #game-container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    #challenge {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+    textarea {
+      width: 100%;
+      height: 150px;
+      margin-bottom: 10px;
+      font-family: monospace;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      padding: 10px 20px;
+      background: #28a745;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #218838;
+    }
+    #output {
+      margin-top: 20px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    #timer {
+      font-size: 18px;
+      margin: 10px 0;
+      color: #ff4500;
+    }
+  </style>
+</head>
+<body>
+  <div id="game-container">
+    <h1>Coding Challenges Game</h1>
+    <p id="challenge">Write a function that adds two numbers and returns the result. Example: add(2, 3) should return 5.</p>
+    <p id="timer">Time: 0 seconds</p>
+    <textarea id="code-editor" placeholder="Write your JavaScript code here..."></textarea>
+    <br>
+    <button onclick="runCode()">Run Code</button>
+    <div id="output"></div>
+  </div>
+
+  <script>
+    const challenges = [
+      {
+        problem: "Write a function that adds two numbers and returns the result. Example: add(2, 3) should return 5.",
+        solution: (fn) => fn(2, 3) === 5
+      },
+      {
+        problem: "Write a function that returns the reverse of a string. Example: reverse('hello') should return 'olleh'.",
+        solution: (fn) => fn('hello') === 'olleh'
+      }
+    ];
+
+    let currentChallengeIndex = 0;
+    let timer = 0;
+    let timerInterval;
+
+    function loadChallenge() {
+      const challenge = challenges[currentChallengeIndex];
+      document.getElementById('challenge').textContent = challenge.problem;
+      document.getElementById('output').textContent = '';
+      document.getElementById('code-editor').value = '';
+      resetTimer();
+      startTimer();
+    }
+
+    function runCode() {
+      const userCode = document.getElementById('code-editor').value;
+      const outputDiv = document.getElementById('output');
+      const challenge = challenges[currentChallengeIndex];
+
+      try {
+        const userFunction = new Function('return ' + userCode)();
+        if (typeof userFunction === 'function' && challenge.solution(userFunction)) {
+          stopTimer();
+          outputDiv.textContent = `✅ Correct! Time taken: ${timer} seconds. Moving to the next challenge.`;
+          currentChallengeIndex++;
+          if (currentChallengeIndex < challenges.length) {
+            setTimeout(loadChallenge, 2000);
+          } else {
+            outputDiv.textContent = `🎉 Congratulations! You've completed all challenges in ${timer} seconds.`;
+          }
+        } else {
+          outputDiv.textContent = "❌ Incorrect. Try again.";
+        }
+      } catch (error) {
+        outputDiv.textContent = `⚠️ Error: ${error.message}`;
+      }
+    }
+
+    function startTimer() {
+      timer = 0;
+      document.getElementById('timer').textContent = `Time: ${timer} seconds`;
+      timerInterval = setInterval(() => {
+        timer++;
+        document.getElementById('timer').textContent = `Time: ${timer} seconds`;
+      }, 1000);
+    }
+
+    function stopTimer() {
+      clearInterval(timerInterval);
+    }
+
+    function resetTimer() {
+      stopTimer();
+      timer = 0;
+      document.getElementById('timer').textContent = `Time: ${timer} seconds`;
+    }
+
+    loadChallenge();
+  </script>
+</body>
+</html>
