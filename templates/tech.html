@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech Trivia Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+      background-color: #f8f8f8;
+      color: #831238;
+    }
+    h1 {
+      color: #831238;
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+    .question {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    .answer {
+      display: block;
+      margin: 10px auto;
+      padding: 12px 20px;
+      font-size: 18px;
+      background-color: #831238;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 60%;
+      transition: background 0.3s;
+    }
+    .answer:hover {
+      background-color: #a1405b;
+    }
+    #score {
+      font-size: 20px;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    #nextButton {
+      display: none;
+      padding: 10px 20px;
+      font-size: 18px;
+      cursor: pointer;
+      background-color: #831238;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      margin-top: 20px;
+      transition: background 0.3s;
+    }
+    #nextButton:hover {
+      background-color: #a1405b;
+    }
+    #quiz-container {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      display: inline-block;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Tech Trivia Game</h1>
+
+  <div id="quiz-container">
+    <div class="question" id="question"></div>
+    <div id="answers"></div>
+    <button id="nextButton" onclick="nextQuestion()">Next Question</button>
+  </div>
+
+  <div id="score"></div>
+
+  <script>
+    const quiz = [
+      {
+        question: "Who is known as the father of the computer?",
+        answers: ["Charles Babbage", "Alan Turing", "Bill Gates", "Steve Jobs"],
+        correctAnswer: 0,
+      },
+      {
+        question: "Which programming language is known as the 'mother of all languages'?",
+        answers: ["C", "Java", "Python", "Assembly"],
+        correctAnswer: 0,
+      },
+      {
+        question: "What does the acronym 'HTML' stand for?",
+        answers: ["HyperText Markup Language", "HyperTool Markup Language", "HomeTool Markup Language", "HyperText Machine Language"],
+        correctAnswer: 0,
+      },
+      {
+        question: "What is the most used operating system for personal computers?",
+        answers: ["Windows", "Linux", "MacOS", "Unix"],
+        correctAnswer: 0,
+      },
+      {
+        question: "Which company developed the JavaScript programming language?",
+        answers: ["Netscape", "Microsoft", "Google", "Oracle"],
+        correctAnswer: 0,
+      }
+    ];
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+
+    function loadQuestion() {
+      const currentQuestion = quiz[currentQuestionIndex];
+      document.getElementById("question").textContent = currentQuestion.question;
+      const answersContainer = document.getElementById("answers");
+      answersContainer.innerHTML = "";
+      
+      currentQuestion.answers.forEach((answer, index) => {
+        const answerButton = document.createElement("button");
+        answerButton.textContent = answer;
+        answerButton.classList.add("answer");
+        answerButton.onclick = () => checkAnswer(index);
+        answersContainer.appendChild(answerButton);
+      });
+
+      document.getElementById("nextButton").style.display = "none";
+    }
+
+    function checkAnswer(selectedIndex) {
+      const currentQuestion = quiz[currentQuestionIndex];
+      const feedbackElement = document.getElementById("score");
+
+      if (selectedIndex === currentQuestion.correctAnswer) {
+        score++;
+        feedbackElement.textContent = "Correct!";
+      } else {
+        feedbackElement.textContent = "Wrong answer. The correct answer was: " + currentQuestion.answers[currentQuestion.correctAnswer];
+      }
+
+      document.getElementById("nextButton").style.display = "inline-block";
+    }
+
+    function nextQuestion() {
+      currentQuestionIndex++;
+
+      if (currentQuestionIndex < quiz.length) {
+        loadQuestion();
+      } else {
+        document.getElementById("quiz-container").innerHTML = `<h2>Quiz Over!</h2><p>Your final score is: ${score}/${quiz.length}</p>`;
+      }
+
+      document.getElementById("score").textContent = "";
+      document.getElementById("nextButton").style.display = "none";
+    }
+
+    loadQuestion();
+  </script>
+
+</body>
+</html>

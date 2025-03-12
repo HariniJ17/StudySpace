@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video with Description</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            margin: 0;
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+        .navbar {
+            width: 100%;
+            background-color:  rgba(131, 18, 56, 1);
+            overflow: hidden;
+            padding: 15px 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar .nav-links {
+            display: flex;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 14px 20px;
+            display: inline-block;
+            transition: background 0.3s ease;
+        }
+        .navbar a:hover {
+            background-color: #575757;
+            border-radius: 5px;
+        }
+        .navbar .brand {
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .content {
+            margin-top: 100px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            max-width: 900px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .video-container video {
+            max-width: 100%;
+            height: auto;
+        }
+        .description {
+            max-width: 400px;
+        }
+        .center-button {
+            margin-top: 40px;
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color:  rgba(131, 18, 56, 1);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .center-button:hover {
+            background-color:  rgb(164, 54, 90);
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="brand">STUDY SPACE</div>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">Videos</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </div>
+    </div>
+    <div class="content">
+        <div class="container">
+            <div class="video-container">
+                <video id="videoPlayer1" controls>
+                    <source src="video1.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="description">
+                <h2>Video 1 Title</h2>
+                <p>Description for video 1.</p>
+                <button onclick="playPause('videoPlayer1')">Play/Pause</button>
+            </div>
+        </div>
+        <div class="container">
+            <div class="video-container">
+                <video id="videoPlayer2" controls>
+                    <source src="video2.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="description">
+                <h2>Video 2 Title</h2>
+                <p>Description for video 2.</p>
+                <button onclick="playPause('videoPlayer2')">Play/Pause</button>
+            </div>
+        </div>
+        <div class="container">
+            <div class="video-container">
+                <video id="videoPlayer3" controls>
+                    <source src="video3.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="description">
+                <h2>Video 3 Title</h2>
+                <p>Description for video 3.</p>
+                <button onclick="playPause('videoPlayer3')">Play/Pause</button>
+            </div>
+        </div>
+        <div class="container">
+            <div class="video-container">
+                <video id="videoPlayer4" controls>
+                    <source src="video4.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="description">
+                <h2>Video 4 Title</h2>
+                <p>Description for video 4.</p>
+                <button onclick="playPause('videoPlayer4')">Play/Pause</button>
+            </div>
+        </div>
+        <a href="./quizzes/quizzes.html"><button class="center-button">Quizz</button></a>
+    </div>
+    <script>
+        function playPause(videoId) {
+            let video = document.getElementById(videoId);
+            if (video.paused) {
+                video.play();
+            } else {
+                video.pause();
+            }
+        }
+    </script>
+</body>
+</html>

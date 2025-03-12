@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fraction Frenzy Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #game-container {
+            width: 80%;
+            max-width: 600px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            text-align: center;
+            border-top: 5px solid #831238;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #831238;
+            margin-bottom: 20px;
+        }
+
+        #fraction-problem {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #004d40;
+            background: #831238;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 80%;
+            font-size: 1rem;
+            margin-top: 20px;
+            border: 2px solid #831238;
+            border-radius: 4px;
+            text-align: center;
+            outline: none;
+        }
+
+        button {
+            padding: 12px 20px;
+            font-size: 1rem;
+            margin-top: 15px;
+            background-color: #831238;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #630f2b;
+            transform: scale(1.05);
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        #next-btn {
+            background-color: #2196f3;
+        }
+
+        #next-btn:hover {
+            background-color: #1976d2;
+        }
+
+        #reset-btn {
+            margin-top: 20px;
+            background-color: #f44336;
+        }
+
+        #reset-btn:hover {
+            background-color: #e53935;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <h1>Fraction Frenzy Game</h1>
+        <div id="problem-container">
+            <p>Solve the following fraction problem:</p>
+            <h2 id="fraction-problem"></h2>
+        </div>
+        <input type="text" id="user-answer" placeholder="Enter your answer (e.g., 3/4)" />
+        <button id="submit-btn">Submit</button>
+        <div id="result"></div>
+        <button id="next-btn" style="display:none;">Next Problem</button>
+        <button id="reset-btn">Reset Game</button>
+    </div>
+
+    <script>
+        let currentProblem = {};
+        let score = 0;
+
+        function generateProblem() {
+            const num1 = Math.floor(Math.random() * 10) + 1;
+            const num2 = Math.floor(Math.random() * 10) + 1;
+            const num3 = Math.floor(Math.random() * 10) + 1;
+            const num4 = Math.floor(Math.random() * 10) + 1;
+            const operator = ['+', '-', '*', '/'][Math.floor(Math.random() * 4)];
+            let problem, solution;
+
+            if (operator === '+') {
+                problem = `${num1}/${num2} + ${num3}/${num4}`;
+                solution = (num1 * num4 + num2 * num3) + '/' + (num2 * num4);
+            } else if (operator === '-') {
+                problem = `${num1}/${num2} - ${num3}/${num4}`;
+                solution = (num1 * num4 - num2 * num3) + '/' + (num2 * num4);
+            } else if (operator === '*') {
+                problem = `${num1}/${num2} * ${num3}/${num4}`;
+                solution = (num1 * num3) + '/' + (num2 * num4);
+            } else {
+                problem = `${num1}/${num2} / ${num3}/${num4}`;
+                solution = (num1 * num4) + '/' + (num2 * num3);
+            }
+
+            currentProblem = { problem, solution };
+            document.getElementById('fraction-problem').textContent = problem;
+            document.getElementById('user-answer').value = '';
+            document.getElementById('result').textContent = '';
+            document.getElementById('next-btn').style.display = 'none';
+        }
+
+        function checkAnswer() {
+            const userAnswer = document.getElementById('user-answer').value.trim();
+            const result = document.getElementById('result');
+            if (userAnswer === currentProblem.solution) {
+                result.textContent = "Correct! Great job!";
+                result.style.color = 'green';
+                score++;
+            } else {
+                result.textContent = `Incorrect. The correct answer is: ${currentProblem.solution}`;
+                result.style.color = 'red';
+            }
+            document.getElementById('next-btn').style.display = 'inline-block';
+        }
+
+        document.getElementById('next-btn').addEventListener('click', generateProblem);
+        document.getElementById('reset-btn').addEventListener('click', function() {
+            score = 0;
+            generateProblem();
+            document.getElementById('result').textContent = '';
+            document.getElementById('next-btn').style.display = 'none';
+        });
+        generateProblem();
+        document.getElementById('submit-btn').addEventListener('click', checkAnswer);
+        document.getElementById('user-answer').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                checkAnswer();
+            }
+        });
+    </script>
+</body>
+</html>
