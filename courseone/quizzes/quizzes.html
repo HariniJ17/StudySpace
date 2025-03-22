@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,32 +14,34 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            flex-direction: column;
         }
-
-        .quiz-container {
+        .container {
+            display: flex;
+            width: 80%;
+            max-width: 800px;
             background-color: white;
-            padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 500px;
-            text-align: center;
+            overflow: hidden;
         }
-
+        .left-section, .right-section {
+            width: 50%;
+            padding: 20px;
+        }
+        .left-section {
+            background-color: #f8f8f8;
+        }
         h2 {
             text-align: center;
         }
-
         .question {
             margin-bottom: 20px;
-            text-align: left;
         }
-
         label {
             display: block;
             margin-bottom: 5px;
         }
-
         button {
             width: 100%;
             padding: 10px;
@@ -52,28 +53,18 @@
             cursor: pointer;
             margin-top: 10px;
         }
-
         button:hover {
             background-color: rgb(154, 40, 78);
         }
-
         button:disabled {
             background-color: #ccc;
             cursor: not-allowed;
         }
-
-        #extraTask {
+        .video-section {
             display: none;
             text-align: center;
             margin-top: 20px;
         }
-
-        video {
-            width: 100%;
-            border-radius: 8px;
-        }
-
-        /* Pop-up styling */
         .popup {
             display: none;
             position: fixed;
@@ -87,13 +78,6 @@
             text-align: center;
             z-index: 10;
         }
-
-        .popup button {
-            width: auto;
-            padding: 8px 15px;
-            margin-top: 10px;
-        }
-
         .overlay {
             display: none;
             position: fixed;
@@ -106,122 +90,104 @@
         }
     </style>
 </head>
-
 <body>
-    <div class="quiz-container" id="quizSection">
-        <h2>Quiz: Python Basics</h2>
-        <form id="quizForm">
-            <div class="question">
-                <p>1. What is the correct file extension for Python files?</p>
-                <label><input type="radio" name="q1" value="a"> .py</label>
-                <label><input type="radio" name="q1" value="b"> .python</label>
-                <label><input type="radio" name="q1" value="c"> .pty</label>
-            </div>
-
-            <div class="question">
-                <p>2. How do you create a variable in Python?</p>
-                <label><input type="radio" name="q2" value="a"> var x = 10</label>
-                <label><input type="radio" name="q2" value="b"> x = 10</label>
-                <label><input type="radio" name="q2" value="c"> 9x = 10</label>
-            </div>
-
-            <div class="question">
-                <p>3. Which keyword is used to define a function in Python?</p>
-                <label><input type="radio" name="q3" value="a"> def</label>
-                <label><input type="radio" name="q3" value="b"> function</label>
-                <label><input type="radio" name="q3" value="c"> fun</label>
-            </div>
-
+    <div class="container">
+        <div class="left-section">
+            <h2>Quiz: Python Basics</h2>
+            <form id="quizForm">
+                <div class="question">
+                    <p>1. What is the correct file extension for Python files?</p>
+                    <label><input type="radio" name="q1" value="a"> .py</label>
+                    <label><input type="radio" name="q1" value="b"> .python</label>
+                    <label><input type="radio" name="q1" value="c"> .pty</label>
+                </div>
+                <div class="question">
+                    <p>2. How do you create a variable in Python?</p>
+                    <label><input type="radio" name="q2" value="a"> var x = 10</label>
+                    <label><input type="radio" name="q2" value="b"> x = 10</label>
+                    <label><input type="radio" name="q2" value="c"> 9x = 10</label>
+                </div>
+                <div class="question">
+                    <p>3. Which keyword is used to define a function in Python?</p>
+                    <label><input type="radio" name="q3" value="a"> def</label>
+                    <label><input type="radio" name="q3" value="b"> function</label>
+                    <label><input type="radio" name="q3" value="c"> fun</label>
+                </div>
+        </div>
+        <div class="right-section">
             <div class="question">
                 <p>4. What is the output of print(2 ** 3) in Python?</p>
                 <label><input type="radio" name="q4" value="a"> 5</label>
                 <label><input type="radio" name="q4" value="b"> 8</label>
                 <label><input type="radio" name="q4" value="c"> 6</label>
             </div>
-
             <div class="question">
                 <p>5. Which of the following data types is immutable in Python?</p>
                 <label><input type="radio" name="q5" value="a"> List</label>
                 <label><input type="radio" name="q5" value="b"> Dictionary</label>
                 <label><input type="radio" name="q5" value="c"> Tuple</label>
             </div>
-
             <button type="button" onclick="checkAnswers()">Submit</button>
-        </form>
-
-        <div id="extraTask">
-            <h3>Extra Learning Activity Required</h3>
-            <p>To unlock your certificate, watch this recap video and retake the quiz.</p>
-            <video id="recapVideo" controls>
-                <source src="recap-video.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <button id="completeButton" onclick="completeExtraTask()" disabled>I Have Completed</button>
+            <button id="project" disabled>Submit Project </button>
+            <a href="/certificate/certificate.html"><button id="certificateButton" disabled>Get Certificate</button></a>
         </div>
-
-        <a href="/certificate/certificate.html">
-            <button id="certificateButton" disabled>Get Certificate</button>
-        </a>
+        </form>
     </div>
-
-    <!-- Pop-up Box -->
+    <div class="video-section" id="videoSection">
+        <h3>Rewatch Video</h3>
+        <video id="quizVideo" width="600" controls>
+            <source src="recap-video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <button id="completeButton" disabled>I have completed</button>
+    </div>
+    <div class="popup" id="popupBox">
+        <h3>Quiz Score</h3>
+        <p id="scoreText"></p>
+        <button onclick="closePopup()">Close</button>
+    </div>
     <div class="overlay" id="overlay"></div>
-    <div class="popup" id="popup">
-        <p id="popupMessage"></p>
-        <button onclick="closePopup()">OK</button>
-    </div>
-
     <script>
-        const correctAnswers = { q1: "a", q2: "b", q3: "a", q4: "b", q5: "c" };
+  
+const correctAnswers = { q1: "a", q2: "b", q3: "a", q4: "b", q5: "c" };
 
-        function checkAnswers() {
-            let score = 0;
-            let totalQuestions = Object.keys(correctAnswers).length;
-
-            for (let key in correctAnswers) {
-                let selectedOption = document.querySelector(`input[name=${key}]:checked`);
-                if (selectedOption && selectedOption.value === correctAnswers[key]) {
-                    score++;
-                }
-            }
-
-            let percentage = (score / totalQuestions) * 100;
-            let message = `Your score is ${score}/${totalQuestions}. `;
-
-            if (score < 3) {
-                message += "You need to rewatch the video before retaking the quiz.";
-                document.getElementById("extraTask").style.display = "block";
-            } else if (percentage >= 80) {
-                message += "Congratulations! You passed the quiz.";
-                document.getElementById("certificateButton").disabled = false;
-            } else {
-                message += "You need to improve your score. Try again!";
-                document.getElementById("extraTask").style.display = "block";
-            }
-
-            showPopup(message);
+function checkAnswers() {
+    let score = 0;
+    let totalQuestions = Object.keys(correctAnswers).length;
+    for (let key in correctAnswers) {
+        let selectedOption = document.querySelector(`input[name=${key}]:checked`);
+        if (selectedOption && selectedOption.value === correctAnswers[key]) {
+            score++;
         }
+    }
+    document.getElementById("scoreText").innerText = `You scored ${score} out of ${totalQuestions}`;
+    document.getElementById("popupBox").style.display = "block";
+    document.getElementById("overlay").style.display = "block";
+    
 
-        function showPopup(message) {
-            document.getElementById("popupMessage").textContent = message;
-            document.getElementById("overlay").style.display = "block";
-            document.getElementById("popup").style.display = "block";
-        }
+    if (score > 2) {
+        document.getElementById("project").disabled = false;
+        //document.getElementById("certificateButton").disabled = false;
+        
+    } else {
+        document.getElementById("videoSection").style.display = "block";
+    }
+}
 
-        function closePopup() {
-            document.getElementById("overlay").style.display = "none";
-            document.getElementById("popup").style.display = "none";
-        }
+document.getElementById("quizVideo").addEventListener("ended", function() {
+    document.getElementById("completeButton").disabled = false;
+});
 
-        document.getElementById("recapVideo").addEventListener("ended", function () {
-            document.getElementById("completeButton").disabled = false;
-        });
+document.getElementById("completeButton").addEventListener("click", function() {
+    document.getElementById("videoSection").style.display = "none"; // Hide video section
+    document.getElementById("quizForm").reset(); // Reset quiz form
+});
 
-        function completeExtraTask() {
-            document.getElementById("extraTask").style.display = "none";
-            document.getElementById("quizForm").reset();
-        }
+function closePopup() {
+    document.getElementById("popupBox").style.display = "none";
+    document.getElementById("overlay").style.display = "none";
+}
+
     </script>
 </body>
-
-</html>
+</html> 
