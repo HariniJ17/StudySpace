@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate Download</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Great+Vibes&display=swap');
+
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #831238;
+            border-radius: 5px;
+            outline: none;
+            width: 250px;
+            text-align: center;
+        }
+        input:focus {
+            border-color: #831238;
+            box-shadow: 0 0 10px rgba(131, 18, 56, 0.5);
+        }
+        #certificate {
+            width: 80%;
+            margin: 20px auto;
+            padding: 40px;
+            text-align: center;
+            background-color: white;
+            position: relative;
+            display: none;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+            border: 10px solid #831238;
+            font-family: 'Playfair Display', serif;
+        }
+        #certificate::before {
+            content: "";
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 5px solid #831238;
+        }
+        h1, h2, h3, h4 {
+            margin: 10px 0;
+        }
+        h2 {
+            font-size: 40px;
+            color: #831238;
+        }
+        h3, h4 {
+            font-size: 24px;
+        }
+        p {
+            font-size: 18px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #831238;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: rgb(148, 41, 77);
+        }
+        #logo {
+            width: 250px;
+            margin-bottom: 15px;
+        }
+        .name-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 10px;
+        }
+        #userName {
+            font-size: 40px;
+            font-weight: bold;
+            color: #831238;
+            font-family: 'Great Vibes', cursive;
+        }
+    </style>
+</head>
+<body>
+    <h1>Download Your Certificate</h1>
+    <input type="text" id="userNameInput" placeholder="Enter your name"><br><br>
+    <label>Course Name: <strong>Python Basics</strong></label><br><br>
+    <button id="generateCertificate">Generate Certificate</button>
+    <button id="downloadBtn" style="display: none;">Download Certificate</button>
+
+    <div id="certificate">
+        <img id="logo" src="/static/images/iconn.png" crossorigin="anonymous" alt="Logo">
+        <h2>CERTIFICATE OF COMPLETION</h2>
+        <p>Presented to</p>
+        <div class="name-section">
+            <h3 id="userName">[Your Name]</h3>
+        </div>
+        <p>For successfully completing the online course on</p>
+        <h4 id="courseName">Python Basics</h4>
+        <p>Provided by <strong>Study Space</strong></p>
+        <p>Date: <span id="date">[Date]</span></p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+        document.getElementById('generateCertificate').addEventListener('click', () => {
+            const userName = document.getElementById('userNameInput').value;
+            if (!userName) {
+                alert("Please enter your name!");
+                return;
+            }
+            const date = new Date().toLocaleDateString();
+            document.getElementById('userName').textContent = userName;
+            document.getElementById('date').textContent = date;
+            document.getElementById('certificate').style.display = 'block';
+            document.getElementById('downloadBtn').style.display = 'inline-block';
+        });
+
+        document.getElementById('downloadBtn').addEventListener('click', () => {
+            html2canvas(document.getElementById('certificate'), {
+                useCORS: true
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'certificate.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        });
+    </script>
+</body>
+</html>

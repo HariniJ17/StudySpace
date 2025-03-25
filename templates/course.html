@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses-StudySpace</title>
+    <!-- Include Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- study space in navbar -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+15&display=swap" rel="stylesheet">
+    <!--full font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Jersey+15&family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/course.css') }}">
+</head>
+
+<body>
+
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand">Study Space</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('courses') }}">Courses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('contact') }}">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('game') }}">MindZone</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('profile') }}">Profile</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="search-container">
+        <div class="search-box">
+            <input type="text" id="search-bar" placeholder="Search..." onkeyup="filterItems()">
+            <i class="fas fa-search search-icon"></i> <!-- Transparent search icon -->
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <ul class="nav nav-tabs" id="moduleTabs">
+            <li class="nav-item">
+                <a class="nav-link active" data-bs-toggle="tab" href="#Video-Based">Video-Based Courses</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#Theory-Based">Theory-Based Courses</a>
+            </li>
+        </ul>
+        <div class="tab-content mt-3">
+            <div class=" tab-pane fade show active" id="Video-Based">
+                <div class="row">
+                    <!-- Card 1 -->
+                    <div class="col-md-4 col-sm-6 mb-4">
+                        <a href="{{ url_for('python')}}" class="card" data-name="Python">
+                            <div class="card">
+                                <img src="{{ url_for('static', filename='images/py.png') }}" alt="Python">
+                                <div class="card-body">
+                                    <h3>Python</h3>
+                                    <p>Learn Python programming from basics to advanced.</p>
+                                    <!-- Enrollment and Rating -->
+                                    <p class="text-muted">
+                                        <span class="text-warning">⭐⭐⭐⭐☆</span> (4.7) | 👥 38,000+ Enrolled
+                                    </p>
+
+                                    <!-- Duration and Level -->
+                                    <p class="text-muted">⏳ 8 Hours | 📚 Beginner</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 mb-4">
+                <a href="web.html" class="card" data-name="Web Development">
+                    <div class="card">
+                        <img src="{{ url_for('static', filename='images/web.png') }}" alt="Web Development">
+                        <div class="card-body">
+                            <h3>Web Development</h3>
+                            <p>Build modern and responsive websites by learning web development</p>
+                            <p class="text-muted">
+                                <span class="text-warning">⭐⭐⭐☆☆</span> (3.0) | 👥 27,000+ Enrolled
+                            </p>
+
+                            <!-- Duration and Level -->
+                            <p class="text-muted">⏳ 10 Hours | 📚 Intermediate</p>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-6 mb-4">
+        <a href="cybersecurity-course.html" class="card" data-name="Cybersecurity">
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/cyber.png') }}" alt="Cybersecurity" >
+                <div class="card-body">
+                    <h3>Cybersecurity</h3>
+                    <p>Protect systems and data from cyber threats.</p>
+                    <p class="text-muted">
+                        <span class="text-warning">⭐⭐⭐⭐☆</span> (4.5) | 👥 38,000+ Enrolled
+                    </p>
+
+                    <!-- Duration and Level -->
+                    <p class="text-muted">⏳ 10 Hours | 📚 Beginner</p>
+        </a>
+    </div>
+    </div>
+    </div>
+    <div class="col-md-4 col-sm-6 mb-4">
+        <a href="machine-learning-course.html" class="card" data-name="Machine Learning">
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/ml.png') }}" alt="Machine Learning">
+                <div class="card-body">
+                    <h3>Machine Learning</h3>
+                    <p>Explore algorithms and build intelligent systems.</p>
+                    <p class="text-muted">
+                        <span class="text-warning">⭐⭐⭐⭐☆</span> (4.5) | 👥 38,000+ Enrolled
+                    </p>
+
+                    <!-- Duration and Level -->
+                    <p class="text-muted">⏳ 10 Hours | 📚 Beginner</p>
+        </a>
+    </div>
+    </div>
+    </div>
+    <div class="col-md-4 col-sm-6 mb-4">
+        <a href="ai-course.html" class="card" data-name="Artificial Intelligence">
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/ai.png') }}" alt="Artificial Intelligence">
+                <div class="card-body">
+                    <h3>Artificial Intelligence</h3>
+                    <p>Dive into AI and create smart applications.</p>
+                    <p class="text-muted">
+                        <span class="text-warning">⭐⭐⭐⭐☆</span> (4.5) | 👥 38,000+ Enrolled
+                    </p>
+
+                    <!-- Duration and Level -->
+                    <p class="text-muted">⏳ 10 Hours | 📚 Beginner</p>
+        </a>
+    </div>
+    </div>
+    </div>
+    <div class="col-md-4 col-sm-6 mb-4">
+        <a href="blockchain-course.html" class="card" data-name="Cloud Computing">
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/cloud.png') }}" alt="Cloud Computing">
+                <div class="card-body">
+                    <h3>Cloud Computing</h3>
+                    <p>Learn the fundamentals of decentralized systems.</p>
+                    <p class="text-muted">
+                        <span class="text-warning">⭐⭐⭐⭐☆</span> (4.5) | 👥 38,000+ Enrolled
+                    </p>
+
+                    <!-- Duration and Level -->
+                    <p class="text-muted">⏳ 10 Hours | 📚 Beginner</p>
+        </a>
+    </div>
+    </div>
+    </div>
+    <div class="col-md-4 col-sm-6 mb-4">
+
+        <a href="c-course.html" class="card" data-name="C">
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/c.png') }}" alt="C">
+                <div class="card-body">
+                    <h3>C Programming</h3>
+                    <p>Master the fundamentals of C programming.</p>
+                    <p class="text-muted">
+                        <span class="text-warning">⭐⭐⭐⭐☆</span> (4.5) | 👥 38,000+ Enrolled
+                    </p>
+
+                    <!-- Duration and Level -->
+                    <p class="text-muted">⏳ 10 Hours | 📚 Beginner</p>
+        </a>
+    </div>
+    </div>
+    </div>
+    <div class="col-md-4 col-sm-6 mb-4">
+        <a href="cplusplus-course.html" class="card" data-name="C++">
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/c++.png') }}" alt="C++">
+                <div class="card-body">
+                    <h3>C++ Programming</h3>
+                    <p>Learn C++ for efficient and fast coding.</p>
+                    <p class="text-muted">
+                        <span class="text-warning">⭐⭐⭐⭐☆</span> (4.5) | 👥 38,000+ Enrolled
+                    </p>
+
+                    <!-- Duration and Level -->
+                    <p class="text-muted">⏳ 10 Hours | 📚 Beginner</p>
+        </a>
+    </div>
+    </div>
+    </div>
+    <div class="col-md-4 col-sm-6 mb-4">
+        <a href="devops-course.html" class="card" data-name="DevOps">
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/devops.png') }}" alt="DevOps">
+                <div class="card-body">
+                    <h3>DevOps</h3>
+                    <p>Streamline development and operations.</p>
+                    <p class="text-muted">
+                        <span class="text-warning">⭐⭐⭐⭐☆</span> (4.5) | 👥 38,000+ Enrolled
+                    </p>
+
+                    <!-- Duration and Level -->
+                    <p class="text-muted">⏳ 10 Hours | 📚 Beginner</p>
+        </a>
+    </div>
+    </div>
+    </div>
+    <div class="col-md-4 col-sm-6 mb-4">
+        <a href="data-science-course.html" class="card" data-name="Data Science">
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/data sci.png') }}" alt="Data Science">
+                <div class="card-body">
+                    <h3>Data Science</h3>
+                    <p>Analyze data and extract meaningful insights.</p>
+                    <p class="text-muted">
+                        <span class="text-warning">⭐⭐⭐⭐☆</span> (4.5) | 👥 38,000+ Enrolled
+                    </p>
+
+                    <!-- Duration and Level -->
+                    <p class="text-muted">⏳ 10 Hours | 📚 Beginner</p>
+
+        </a>
+    </div>
+    </div>
+    </div>
+    <div class="col-md-4 col-sm-6 mb-4">
+        <a href="docker-course.html" class="card" data-name="Deep Learning">
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/deep.png') }}" alt="Deep Learning">
+                <div class="card-body">
+                    <h3>Deep Learning</h3>
+                    <p>Learn containerization and simplify deployment.</p>
+                    <p class="text-muted">
+                        <span class="text-warning">⭐⭐⭐⭐☆</span> (4.5) | 👥 38,000+ Enrolled
+                    </p>
+
+                    <!-- Duration and Level -->
+                    <p class="text-muted">⏳ 10 Hours | 📚 Beginner</p>
+        </a>
+    </div>
+    </div>
+    </div>
+    <div class="col-md-4 col-sm-6 mb-4">
+        <a href="cloud-computing-course.html" class="card" data-name="Digital Marketing">
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/digital.png') }}" alt="Digital Marketing">
+                <div class="card-body">
+                    <h3>Digital Marketing</h3>
+                    <p>Understand cloud services and architecture.</p>
+                    <p class="text-muted">
+                        <span class="text-warning">⭐⭐⭐⭐☆</span> (4.5) | 👥 38,000+ Enrolled
+                    </p>
+
+                    <!-- Duration and Level -->
+                    <p class="text-muted">⏳ 10 Hours | 📚 Beginner</p>
+        </a>
+    </div>
+    </div>
+    </div>
+    <div class="col-md-4 col-sm-6 mb-4">
+        <a href="flutter-course.html" class="card" data-name="Data Structure">
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/data stru.png') }}" alt="Flutter">
+                <div class="card-body">
+                    <h3>Data Structure</h3>
+                    <p>Build cross-platform mobile applications.</p>
+                    <p class="text-muted">
+                        <span class="text-warning">⭐⭐⭐⭐☆</span> (4.5) | 👥 38,000+ Enrolled
+                    </p>
+
+                    <!-- Duration and Level -->
+                    <p class="text-muted">⏳ 10 Hours | 📚 Beginner</p>
+        </a>
+    </div>
+    </div>
+    </div>
+    <div class="col-md-4 col-sm-6 mb-4">
+        <a href="javascript-course.html" class="card" data-name="Data Matrix">
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/data mar.png') }}" alt="Data">
+                <div class="card-body">
+                    <h3>Data Matrix</h3>
+                    <p>Learn the core language for web development.</p>
+                    <p class="text-muted">
+                        <span class="text-warning">⭐⭐⭐⭐☆</span> (4.5) | 👥 38,000+ Enrolled
+                    </p>
+
+                    <!-- Duration and Level -->
+                    <p class="text-muted">⏳ 10 Hours | 📚 Beginner</p>
+        </a>
+    </div>
+    </div>
+    </div>
+    <div class="col-md-4 col-sm-6 mb-4">
+        <a href="java-course.html" class="card" data-name="Data Analysis">
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/data ana.png') }}" alt="Data Analysis">
+                <div class="card-body">
+                    <h3>Data Analysis</h3>
+                    <p>Master the essentials of object-oriented programming.</p>
+                    <p class="text-muted">
+                        <span class="text-warning">⭐⭐⭐⭐☆</span> (4.5) | 👥 38,000+ Enrolled
+                    </p>
+
+                    <!-- Duration and Level -->
+                    <p class="text-muted">⏳ 10 Hours | 📚 Beginner</p>
+        </a>
+    </div>
+    </div>
+    </div>
+    <div class="col-md-4 col-sm-6 mb-4">
+        <a href="go-course.html" class="card" data-name="Chemistry">
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/che.png') }}" alt="Chemistry">
+                <div class="card-body">
+                    <h3>Chemistry</h3>
+                    <p>Learn the Go programming language for concurrency.</p>
+                    <p class="text-muted">
+                        <span class="text-warning">⭐⭐⭐⭐☆</span> (4.5) | 👥 38,000+ Enrolled
+                    </p>
+
+                    <!-- Duration and Level -->
+                    <p class="text-muted">⏳ 10 Hours | 📚 Beginner</p>
+        </a>
+    </div>
+    </div>
+    </div>
+    <div class="col-md-4 col-sm-6 mb-4">
+        <a href="ruby-course.html" class="card" data-name="Maths">
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/maths.png') }}" alt="Maths">
+                <div class="card-body">
+                    <h3>Maths</h3>
+                    <p>Discover the beauty of Ruby programming.</p>
+                    <p class="text-muted">
+                        <span class="text-warning">⭐⭐⭐⭐☆</span> (4.5) | 👥 38,000+ Enrolled
+                    </p>
+                    <!-- Duration and Level -->
+                    <p class="text-muted">⏳ 10 Hours | 📚 Beginner</p>
+        </a>
+    </div>
+    </div>
+    </div>
+    <div class="col-md-4 col-sm-6 mb-4">
+        <a href="swift-course.html" class="card" data-name="English-Gammer">
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/english.png') }}" alt="English-Gammer">
+                <div class="card-body">
+                    <h3>English-Gammer</h3>
+                    <p>Learn Swift to build iOS applications.</p>
+                    <p class="text-muted">
+                        <span class="text-warning">⭐⭐⭐⭐☆</span> (4.5) | 👥 38,000+ Enrolled
+                    </p>
+
+                    <!-- Duration and Level -->
+                    <p class="text-muted">⏳ 10 Hours | 📚 Beginner</p>
+        </a>
+    </div>
+    </div>
+    </div>
+    <div class="col-md-4 col-sm-6 mb-4">
+        <a href="kotlin-course.html" class="card" data-name="Mircosoft-Excel">
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/excel.png') }}" alt="Mircosoft-Excel">
+                <div class="card-body">
+                    <h3>Mircosoft-Excel</h3>
+                    <p>Build modern apps with Kotlin for Android development.</p>
+                    <p class="text-muted">
+                        <span class="text-warning">⭐⭐⭐⭐☆</span> (4.5) | 👥 38,000+ Enrolled
+                    </p>
+
+                    <!-- Duration and Level -->
+                    <p class="text-muted">⏳ 10 Hours | 📚 Beginner</p>
+        </a>
+    </div>
+    </div>
+    </div>
+    <div class="col-md-4 col-sm-6 mb-4">
+
+        <a href="sql-course.html" class="card" data-name="VB.net">
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/vb.png') }}" alt="VB.net">
+                <div class="card-body">
+                    <h3>VB.net</h3>
+                    <p>Learn SQL for managing databases effectively.</p>
+                    <p class="text-muted">
+                        <span class="text-warning">⭐⭐⭐⭐☆</span> (4.5) | 👥 38,000+ Enrolled
+                    </p>
+                    <!-- Duration and Level -->
+                    <p class="text-muted">⏳ 10 Hours | 📚 Beginner</p>
+        </a>
+    </div>
+    </div>
+    </div>
+    <div class="col-md-4 col-sm-6 mb-4">
+        <a href="sql-course.html" class="card" data-name="VB.net">
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/java.png') }}" alt="VB.net">
+                <div class="card-body">
+                    <h3>Java</h3>
+                    <p>Learn SQL for managing databases effectively.</p>
+                    <p class="text-muted">
+                        <span class="text-warning">⭐⭐⭐⭐☆</span> (4.5) | 👥 38,000+ Enrolled
+                    </p>
+                    <!-- Duration and Level -->
+                    <p class="text-muted">⏳ 10 Hours | 📚 Beginner</p>
+        </a>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="tab-pane fade" id="Theory-Based">
+        <div class="row">
+            <div class="col-md-4 col-sm-6 mb-4">
+                <a href="{{url_for('data_manipulation')}}" class="card" data-name="VB.net">
+                    <div class="card">
+                        <img src="{{ url_for('static', filename='images/datamani.png') }}" class="card-img-top"
+                            alt="Data Manipulation">
+                        <div class="card-body">
+                            <h3>Data Manipulation</h3>
+                            <p>Understand data operations and transformations.</p>
+                            <p class="text-muted">
+                                <span class="text-warning">⭐⭐⭐⭐☆</span> (4.5) | 👥 38,000+ Enrolled
+                            </p>
+                            <p class="text-muted">⏳ 10 Hours | 📚 Beginner</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4 col-sm-6 mb-4">
+                <a href="{{url_for('Physics')}}" class="card" data-name="VB.net">
+                    <div class="card">
+                        <img src="{{ url_for('static', filename='images/physics.png') }}" class="card-img-top"
+                            alt="Physics" height="30px">
+                        <div class="card-body">
+                            <h3>Physics</h3>
+                            <p>Explore the fundamental principles of Physics, including motion, forces, and energy.</p>
+                            <p class="text-muted">
+                                <span class="text-warning">⭐⭐⭐⭐☆</span> (4.7) | 👥 42,000+ Enrolled
+                            </p>
+                            <p class="text-muted">⏳ 12 Hours | 📚 Beginner to Intermediate</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="text-center py-3" style="background-color: #831238;">
+        <p>&copy; 2025 Study Space. All Rights Reserved. | <a href="privacy.html">Privacy Policy</a></p>
+    </footer>
+    <script src="{{url_for('static',filename='js/course.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>

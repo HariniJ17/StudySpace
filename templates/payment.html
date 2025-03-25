@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Jersey+15&family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/payment.css') }}">
+        
+</head>
+<body>
+
+    <div class="container mt-5">
+        <h2 class="text-center">Payment Page</h2>
+
+        <div class="card mt-4">
+            <div class="card-body">
+                <h4>Course Details</h4>
+                <p><strong>Course Name:</strong> {{ course_name }}</p>
+                <p><strong>Course Cost:</strong> ₹{{ course_cost }}</p>
+                <p><strong>Course Duration:</strong> {{ course_duration }}</p>
+
+                <h4>Payment Information</h4>
+                <form action="{{ url_for('process_payment') }}" method="POST">
+                    <!-- Hidden fields to pass course details -->
+                    <input type="hidden" name="course_name" value="{{ course_name }}">
+                    <input type="hidden" name="course_cost" value="{{ course_cost }}">
+                    <input type="hidden" name="course_duration" value="{{ course_duration }}">
+                    <input type="hidden" name="course_id" value="{{ course_id }}">
+                
+                    <label>Card Number:</label>
+                    <input type="text" name="card_number" required class="form-control mb-3">
+                
+                    <label>Expiry Date (MM/YY):</label>
+                    <input type="text" name="expiry_date" required class="form-control mb-3">
+                
+                    <label>CVV:</label>
+                    <input type="text" name="cvv" required class="form-control mb-3">
+                
+                    <button type="submit" class="btn btn-primary w-100">Proceed to Pay</button>
+                </form>
+                
+
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="{{ url_for('courses') }}" class="btn btn-secondary">Back to Courses</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

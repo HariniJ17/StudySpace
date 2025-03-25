@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz: Data Manipulation and Cleaning</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/datamani.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- study space in navbar -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jersey+15&display=swap" rel="stylesheet">
+  <!--full font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+      href="https://fonts.googleapis.com/css2?family=Jersey+15&family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet">
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1>Quiz: Data Manipulation and Cleaning</h1>
+        <p>Test your knowledge on data manipulation and cleaning concepts.</p>
+    </header>
+
+    <!-- Quiz Section -->
+
+
+            <form id="quiz-form">
+                <section id="quiz">
+                    <div class="container">
+                        <h2>Answer the following questions:</h2>
+            
+                        <form id="quiz-form">
+                            <!-- Question 1 -->
+                            <div class="question">
+                                <p>1. What is data cleaning?</p>
+                                <label>
+                                    <input type="radio" name="q1" value="a"> Removing missing data
+                                </label><br>
+                                <label>
+                                    <input type="radio" name="q1" value="b"> Manipulating data to match a specific format
+                                </label><br>
+                                <label>
+                                    <input type="radio" name="q1" value="c"> Both a and b
+                                </label><br>
+                            </div>
+            
+                            <!-- Question 2 -->
+                            <div class="question">
+                                <p>2. What is the effect of removing duplicate data in a dataset?</p>
+                                <label>
+                                    <input type="radio" name="q2" value="a"> It increases data accuracy
+                                </label><br>
+                                <label>
+                                    <input type="radio" name="q2" value="b"> It reduces data volume
+                                </label><br>
+                                <label>
+                                    <input type="radio" name="q2" value="c"> Both a and b
+                                </label><br>
+                            </div>
+            
+                            <!-- Question 3 -->
+                            <div class="question">
+                                <p>3. What is the best approach for handling missing data?</p>
+                                <label>
+                                    <input type="radio" name="q3" value="a"> Removing missing data
+                                </label><br>
+                                <label>
+                                    <input type="radio" name="q3" value="b"> Replacing missing data with the mean
+                                </label><br>
+                                <label>
+                                    <input type="radio" name="q3" value="c"> Both a and b
+                                </label><br>
+                            </div>
+            
+                            <!-- Question 4 -->
+                            <div class="question">
+                                <p>4. What is the importance of standardizing data?</p>
+                                <label>
+                                    <input type="radio" name="q4" value="a"> To maintain consistency across datasets
+                                </label><br>
+                                <label>
+                                    <input type="radio" name="q4" value="b"> To make it more readable
+                                </label><br>
+                                <label>
+                                    <input type="radio" name="q4" value="c"> Both a and b
+                                </label><br>
+                            </div>
+            
+                            <!-- Question 5 -->
+                            <div class="question">
+                                <p>5. What is a common method to correct data types?</p>
+                                <label>
+                                    <input type="radio" name="q5" value="a"> Converting numbers to strings
+                                </label><br>
+                                <label>
+                                    <input type="radio" name="q5" value="b"> Converting strings to numeric values
+                                </label><br>
+                                <label>
+                                    <input type="radio" name="q5" value="c"> Both a and b
+                                </label><br>
+                            </div>
+            
+                            <!-- Question 6 -->
+                            <div class="question">
+                                <p>6. What is the purpose of data validation?</p>
+                                <label>
+                                    <input type="radio" name="q6" value="a"> Ensuring data accuracy
+                                </label><br>
+                                <label>
+                                    <input type="radio" name="q6" value="b"> Making the data easier to read
+                                </label><br>
+                                <label>
+                                    <input type="radio" name="q6" value="c"> Both a and b
+                                </label><br>
+                            </div>
+            
+                            <!-- Question 7 -->
+                            <div class="question">
+                                <p>7. What is data normalization?</p>
+                                <label>
+                                    <input type="radio" name="q7" value="a"> Transforming data to a common scale
+                                </label><br>
+                                <label>
+                                    <input type="radio" name="q7" value="b"> Ensuring data consistency
+                                </label><br>
+                                <label>
+                                    <input type="radio" name="q7" value="c"> Both a and b
+                                </label><br>
+                            </div>
+            
+                            <!-- Question 8 -->
+                            <div class="question">
+                                <p>8. What is the impact of incorrect data types in a dataset?</p>
+                                <label>
+                                    <input type="radio" name="q8" value="a"> It can lead to errors in calculations
+                                </label><br>
+                                <label>
+                                    <input type="radio" name="q8" value="b"> It improves data analysis
+                                </label><br>
+                                <label>
+                                    <input type="radio" name="q8" value="c"> Both a and b
+                                </label><br>
+                            </div>
+            
+                            <!-- Question 9 -->
+                            <div class="question">
+                                <p>9. Why is it important to handle outliers in data?</p>
+                                <label>
+                                    <input type="radio" name="q9" value="a"> They can distort analysis results
+                                </label><br>
+                                <label>
+                                    <input type="radio" name="q9" value="b"> They improve the quality of the data
+                                </label><br>
+                                <label>
+                                    <input type="radio" name="q9" value="c"> Both a and b
+                                </label><br>
+                            </div>
+            
+                            <!-- Question 10 -->
+                            <div class="question">
+                                <p>10. Which method is often used for handling missing data?</p>
+                                <label>
+                                    <input type="radio" name="q10" value="a"> Imputation
+                                </label><br>
+                                <label>
+                                    <input type="radio" name="q10" value="b"> Deletion
+                                </label><br>
+                                <label>
+                                    <input type="radio" name="q10" value="c"> Both a and b
+                                </label><br>
+                            </div>
+
+                <!-- Submit Button -->
+                <button type="submit">Submit Quiz</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Result Modal (Pop-up Box) -->
+    <div id="result-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Your Score:</h3>
+            <p id="score"></p>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2025 Learning Platform. All rights reserved.</p>
+    </footer>
+
+    <script src="{{url_for('static', filename='js/quiz.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
