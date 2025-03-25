@@ -1,0 +1,179 @@
+/* General Body Styling */
+body {
+    font-family: 'Philosopher', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+/* Navbar Styles */
+.navbar {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(113, 0, 38, 0.432);
+    /* Semi-transparent with blur effect */
+    backdrop-filter: blur(10px);
+    padding: 5px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    transition: background 0.3s ease-in-out;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar:hover {
+    background: rgba(131, 18, 56, 0.9);
+    /* Darker on hover */
+}
+
+.navbar-brand {
+    font-family: "Jersey 15", serif;
+    font-size: 3rem;
+    font-weight: lighter;
+    color: white;
+    /* Default color */
+    transition: color 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+    /* Smooth transition */
+    opacity: 1;
+    /* Default opacity */
+}
+
+.navbar-brand:hover {
+    color: #fdfdfd;
+    /* Hover color */
+    transform: scale(1.1);
+    /* Slight zoom effect */
+    opacity: 0.8;
+    /* Slightly fade effect */
+    text-decoration: none;
+}
+
+.navbar-nav .nav-item {
+    margin-left: 20px;
+    font-size: 1.5rem;
+    margin: 0 15px;
+    transition: #ffffff 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+    opacity: 1;
+}
+
+.navbar-nav .nav-link {
+    transition: #831238 0.3s ease;
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #ffffff;
+    /* Hover color */
+    transform: scale(1.1);
+    /* Slight zoom effect */
+    opacity: 0.8;
+    /* Slightly fade effect */
+    text-decoration: none;
+}
+
+/* Responsive Navbar */
+.navbar-toggler {
+    border: none;
+    background: none;
+}
+
+.navbar-toggler-icon {
+    filter: invert(1);
+    /* Makes the toggler icon white */
+}
+.container1{
+    margin: 100px 100px 100px 100px;
+}
+/* User Profile Section */
+.user h2 {
+    color: #831238;
+    font-weight: bold;
+    margin-bottom: 2rem;
+}
+
+.rounded-circle {
+    border: 4px solid #831238;
+}
+
+.card {
+    border: 1px solid #831238;
+    border-radius: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: #831238;
+    color: white;
+    font-weight: bold;
+}
+
+.card-body p {
+    margin: 10px 0;
+}
+
+/* Buttons Styling */
+.btn-warning {
+    background-color: #831238;;
+    color: white;
+    border: none;
+    
+}
+
+.btn-warning:hover {
+    background-color: #7e0e0ecc;
+}
+
+.btn-primary {
+    background-color: #831238;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #6b0f2e;
+}
+
+.btn-danger {
+    background-color:white;
+    color: #831238;
+    border-color:  black;
+}
+
+.btn-danger:hover {
+    background-color: #8a0022;
+}
+
+/* Footer Styling */
+footer {
+    color: white;
+}
+
+footer a {
+    color: #ffccd5;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Tab Navigation Styling */
+.nav-tabs .nav-link {
+    color: #831238;
+    font-weight: bold;
+}
+
+.nav-tabs .nav-link.active {
+    background-color: #831238;
+    color: white;
+    border: none;
+}
+
+.tab-content {
+    margin-top: 20px;
+}
+
+
