@@ -1,216 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
-        }
-        .container {
-            display: flex;
-            width: 80%;
-            max-width: 800px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-        .left-section, .right-section {
-            width: 50%;
-            padding: 20px;
-        }
-        .left-section {
-            background-color: #f8f8f8;
-        }
-        h2 {
-            text-align: center;
-        }
-        .question {
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: rgba(131, 18, 56, 1);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        button:hover {
-            background-color: rgb(154, 40, 78);
-        }
-        button:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-        }
-        .video-section {
-            display: none;
-            text-align: center;
-            margin-top: 20px;
-        }
-        .popup {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            z-index: 10;
-        }
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.3);
-            z-index: 5;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .container {
+      width: 80%;
+      max-width: 600px;
+      background-color: white;
+      padding: 20px;
+      margin: auto;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .question {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    button {
+      padding: 10px;
+      font-size: 16px;
+      background-color: rgba(131, 18, 56, 1);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+    }
+
+    #overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+    }
+  </style>
 </head>
+
 <body>
-    <div class="container">
-        <div class="left-section">
-            <h2>Quiz: Python Basics</h2>
-            <form id="quizForm">
-                <div class="question">
-                    <p>1. What is the correct file extension for Python files?</p>
-                    <label><input type="radio" name="q1" value="a"> .py</label>
-                    <label><input type="radio" name="q1" value="b"> .python</label>
-                    <label><input type="radio" name="q1" value="c"> .pty</label>
-                </div>
-                <div class="question">
-                    <p>2. How do you create a variable in Python?</p>
-                    <label><input type="radio" name="q2" value="a"> var x = 10</label>
-                    <label><input type="radio" name="q2" value="b"> x = 10</label>
-                    <label><input type="radio" name="q2" value="c"> 9x = 10</label>
-                </div>
-                <div class="question">
-                    <p>3. Which keyword is used to define a function in Python?</p>
-                    <label><input type="radio" name="q3" value="a"> def</label>
-                    <label><input type="radio" name="q3" value="b"> function</label>
-                    <label><input type="radio" name="q3" value="c"> fun</label>
-                </div>
-        </div>
-        <div class="right-section">
-            <div class="question">
-                <p>4. What is the output of print(2 ** 3) in Python?</p>
-                <label><input type="radio" name="q4" value="a"> 5</label>
-                <label><input type="radio" name="q4" value="b"> 8</label>
-                <label><input type="radio" name="q4" value="c"> 6</label>
-            </div>
-            <div class="question">
-                <p>5. Which of the following data types is immutable in Python?</p>
-                <label><input type="radio" name="q5" value="a"> List</label>
-                <label><input type="radio" name="q5" value="b"> Dictionary</label>
-                <label><input type="radio" name="q5" value="c"> Tuple</label>
-            </div>
-            <button type="button" onclick="checkAnswers()">Submit</button>
-            <button id="certificateButton" disabled onclick="redirectToCertificate()">Get Certificate</button>
-        </div>
-        </form>
-    </div>
-    <div class="video-section" id="videoSection">
-        <h3>Rewatch Video</h3>
-        <div id="player"></div>
-        <button id="completeButton" disabled>I have completed</button>
-    </div>
-    <div class="popup" id="popupBox">
-        <h3>Quiz Score</h3>
-        <p id="scoreText"></p>
-        <button onclick="closePopup()">Close</button>
-    </div>
-    <div class="overlay" id="overlay"></div>
-    <script src="https://www.youtube.com/iframe_api"></script>
-    <script>
-  
-const correctAnswers = { q1: "a", q2: "b", q3: "a", q4: "b", q5: "c" };
 
-function redirectToCertificate() {
-    // Redirect to certificate page only if the button is enabled
-    let certButton = document.getElementById("certificateButton");
-    if (!certButton.disabled) {
-        window.location.href = "{{ url_for('certificate') }}";  // Flask route
+  <h2 id="quizTitle"></h2>
+  <div class="container">
+    <form id="quizForm">
+      <div id="quizQuestions"></div>
+      <button type="button" id="submitBtn">Submit</button>
+    </form>
+  </div>
+
+  <!-- Popup and Overlay -->
+  <div id="overlay"></div>
+  <div class="popup" id="popupBox">
+    <h3>Quiz Score</h3>
+    <p id="scoreText"></p>
+    <button onclick="closePopup()">Close</button>
+    <button id="relearnBtn" style="display: none;" onclick="relearnCourse()">Re-Learn the Course</button>
+    <button id="certificateButton" style="display: none;">Get Certificate</button>
+  </div>
+
+  <script>
+    const courseUrls = {
+      "Python Basics": "course.html?course=Python%20Basics",
+      "Web Development": "course.html?course=Web%20Development"
+    };
+
+    const courseQuizzes = {
+      "Python Basics": [
+        { question: "What is the correct file extension for Python files?", options: ["a) .py", "b) .python", "c) .pty"], answer: "a" },
+        { question: "How do you create a variable in Python?", options: ["a) var x = 10", "b) x = 10", "c) 9x = 10"], answer: "b" },
+        { question: "Which keyword is used to define a function in Python?", options: ["a) def", "b) function", "c) fun"], answer: "a" },
+        { question: "What is the output of print(2 ** 3) in Python?", options: ["a) 5", "b) 8", "c) 6"], answer: "b" },
+        { question: "Which of the following data types is immutable in Python?", options: ["a) List", "b) Dictionary", "c) Tuple"], answer: "c" }
+      ],
+      "Web Development": [
+      { question: "Which language is used for structuring web pages?", options: ["a) HTML", "b) CSS", "c) JavaScript"], answer: "a" },
+      { question: "Which tag is used to create a hyperlink in HTML?", options: ["a) <link>", "b) <a>", "c) <href>"], answer: "b" },
+      { question: "What does CSS stand for?", options: ["a) Computer Style Sheets", "b) Cascading Style Sheets", "c) Creative Styling System"], answer: "b" },
+      { question: "Which property is used to change the text color in CSS?", options: ["a) color", "b) text-color", "c) font-color"], answer: "a" },
+      { question: "Which JavaScript keyword is used to declare a variable?", options: ["a) var", "b) let", "c) Both a and b"], answer: "c" }
+      ], 
+    };
+
+    function getCourseFromURL() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get("course") || "Python Basics"; // Default to Python
     }
-}
-function checkAnswers() {
-    let score = 0;
-    let totalQuestions = Object.keys(correctAnswers).length;
-    
-    for (let key in correctAnswers) {
-        let selectedOption = document.querySelector(`input[name=${key}]:checked`);
-        if (selectedOption && selectedOption.value === correctAnswers[key]) {
-            score++;
+
+    function loadQuiz() {
+      const course = getCourseFromURL();
+      document.getElementById("quizTitle").innerText = `Quiz: ${course}`;
+
+      const quizData = courseQuizzes[course];
+      const quizQuestionsDiv = document.getElementById("quizQuestions");
+
+      quizQuestionsDiv.innerHTML = ""; // Clear previous questions
+
+      quizData.forEach((q, index) => {
+        let questionHTML = `<div class=question>
+        <p>${index + 1}. ${q.question}</p>`;
+        q.options.forEach(opt => {
+          questionHTML += `<label><input type="radio" name="q${index}" value="${opt[0]}"> ${opt}</label>`;
+        });
+        questionHTML += `</div>`;
+        quizQuestionsDiv.innerHTML += questionHTML;
+      });
+    }
+
+    function checkAnswers() {
+      const course = getCourseFromURL();
+      const quizData = courseQuizzes[course];
+      let score = 0;
+      let totalQuestions = quizData.length;
+
+      quizData.forEach((q, index) => {
+        let selectedOption = document.querySelector(`input[name="q${index}"]:checked`);
+        if (selectedOption && selectedOption.value === q.answer) {
+          score++;
         }
+      });
+
+      document.getElementById("scoreText").innerText = `You scored ${score} out of ${totalQuestions}`;
+      document.getElementById("popupBox").style.display = "block";
+      document.getElementById("overlay").style.display = "block";
+
+      // Show the "Re-Learn" button if score is below 4
+      let relearnBtn = document.getElementById("relearnBtn");
+      let certBtn = document.getElementById("certificateButton");
+      if (score < 4) {
+        relearnBtn.style.display = "block";
+        certBtn.style.display = "none"; // Hide certificate button
+        relearnBtn.onclick = function () {
+          if (course === "Python Basics") {
+              window.location.href = "{{ url_for('python')}}";
+            } else if (course === "Web Development") {
+              window.location.href = "{{ url_for('webdev') }}";
+            } else {
+              window.location.href = "/courses/default.html";
+            }
+        };
+      } else {
+        // Show "Get Certificate" button
+        relearnBtn.style.display = "none"; // Hide relearn button
+        certBtn.style.display = "block";
+        certBtn.onclick = function () {
+        window.location.href = "{{ url_for('certificate') }}";
+ // Redirect to certificate page
+        };
+      }
     }
 
-    document.getElementById("scoreText").innerText = `You scored ${score} out of ${totalQuestions}`;
-    document.getElementById("popupBox").style.display = "block";
-    document.getElementById("overlay").style.display = "block";
-
-    if (score > 2) {
-        let certButton = document.getElementById("certificateButton");
-        certButton.disabled = false;
-        certButton.style.pointerEvents = "auto";
-        certButton.style.opacity = "1";
-    } else {
-        document.getElementById("videoSection").style.display = "block";
+    function closePopup() {
+      document.getElementById("popupBox").style.display = "none";
+      document.getElementById("overlay").style.display = "none";
     }
-}
 
-document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("certificateButton").disabled = true;
-});
+    function relearnCourse() {
+      const course = getCourseFromURL();
+      window.location.href = `course.html?course=${encodeURIComponent(course)}`;
+    }
 
-var player;
-function onYouTubeIframeAPIReady() {
-    player = new YT.Player('player', {
-        height: '340',
-        width: '600',
-        videoId: '8KCuHHeC_M0',
-        events: {
-            'onStateChange': onPlayerStateChange
-        }
+    document.addEventListener("DOMContentLoaded", () => {
+      loadQuiz();
+      document.getElementById("submitBtn").addEventListener("click", checkAnswers);
     });
-}
 
-function onPlayerStateChange(event) {
-    if (event.data === YT.PlayerState.ENDED) {
-        document.getElementById("completeButton").disabled = false;
-    }
-}
+  </script>
 
-document.getElementById("completeButton").addEventListener("click", function() {
-    document.getElementById("videoSection").style.display = "none";
-});
-
-function closePopup() {
-    document.getElementById("popupBox").style.display = "none";
-    document.getElementById("overlay").style.display = "none";
-}
-
-    </script>
 </body>
+
 </html>
