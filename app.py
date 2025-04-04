@@ -3,16 +3,12 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-# from fpdf import FPDF
 import sqlite3
 import os
 from flask import Flask, render_template, request, send_file
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
-# from reportlab.lib import colors
-# from reportlab.lib.units import inch
 import io
-
 
 app = Flask(__name__)
 app.secret_key = "your_secret_key"
@@ -68,6 +64,7 @@ def create_tables():
      # ✅ Insert courses only if they don’t exist
     courses = [
         ("Python Basics", 699, "4 Weeks"),
+        ("Web Development", 299, "3 Weeks"),
         ("Data Manipulation", 599, "4 Weeks")
     ]
 
@@ -109,45 +106,6 @@ def create_tables():
     
     conn.commit()
     conn.close()
-    
-    # DATABASE = 'studyspace.db'
-    # def get_db():
-    #     """Connect to SQLite database"""
-    #     db = getattr(g, '_database', None)
-    #     if db is None:
-    #         db = g._database = sqlite3.connect(DATABASE)
-    #         db.row_factory = sqlite3.Row  # Enables column access by name
-    #     return db
-
-    # @app.route('/certificate')
-    # def generate_certificate():
-    #     """Fetch the username and enrolled course"""
-    #     if 'username' in session:  # Assuming user is logged in
-    #         username = session['username']
-
-    #         # db = get_db()
-    #         cursor = db.cursor()
-    #         cursor.execute("SELECT course_name FROM enrollments WHERE username = ?", (username,))
-    #         enrolled_course = cursor.fetchone()
-
-    #         if enrolled_course:
-    #             course_name = enrolled_course['course_name']
-    #         else:
-    #             course_name = "No Course Found"
-
-    #         return render_template('certificate.html', username=username, course_name=course_name)
-
-    #     return "User not logged in", 401
-@app.route('/certificate')
-def certificate():
-    return render_template('certificate.html')
-
-    # @app.teardown_appcontext
-    # def close_connection(exception):
-    #     """Close database connection"""
-    #     db = getattr(g, '_database', None)
-    #     if db is not None:
-    #         db.close()
             
 # First Page
 @app.route("/")
@@ -241,7 +199,7 @@ def login():
             if user and check_password_hash(user['password'], password):
                 session["username"] = user["username"]  # ✅ Store username in session
                 session["user_id"] = user["id"]  # ✅ Store user ID for future reference
-                return redirect(url_for('profile'))  # ✅ Redirect to profile
+                return redirect(url_for('home'))  # ✅ Redirect to profile
             else:
                 flash('Invalid Student Credentials!', 'danger')
 
@@ -273,9 +231,7 @@ def admin_dashboard():
     LIMIT 5
 """)
     top_courses = cursor.fetchall()
-
     conn.close()
-
     return render_template('admin_dashboard.html', users=users, courses=courses, enrollments=enrollments, total_revenue=total_revenue, top_courses=top_courses)
 
 # Courses Page
@@ -306,7 +262,7 @@ def python():
     conn.close()
     return render_template("python.html", course=course, enrolled=enrolled)
 
-#Python courses
+# Python courses
 @app.route("/pycourse")
 def pycourse():
     course_id = 1  # Python course ID
@@ -320,6 +276,39 @@ def pycourse():
     conn.close()
     return render_template("pycourse.html", modules=modules)
 
+# Web development course
+@app.route("/webdev")
+def webdev():
+    course_id = 2  
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    # Fetch course details
+    cursor.execute("SELECT * FROM courses WHERE course_id = ?", (course_id,))
+    course = cursor.fetchone()
+
+    # Check if the user is enrolled
+    enrolled = False
+    if "username" in session:
+        cursor.execute("SELECT * FROM enrollments WHERE username = ? AND course_id = ?", (session["username"], course_id))
+        enrolled = bool(cursor.fetchone())
+
+    conn.close()
+    return render_template("web.html", course=course, enrolled=enrolled)
+
+@app.route("/webdevcourse")
+def webdevcourse():
+    course_id = 2  # Python course ID
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    # Fetch course modules or content
+    cursor.execute("SELECT * FROM course_modules WHERE course_id = ?", (course_id,))
+    modules = cursor.fetchall()
+
+    conn.close()
+    return render_template("webdevelop.html", modules=modules)
+
 @app.route('/quiz')
 def quiz():
     return render_template('quiz.html')  # Create a quiz.html file in templates folder
@@ -331,8 +320,8 @@ def data_manipulation():
     if id:
         conn = get_db_connection()
         cursor = conn.cursor()
-        # Check if user is enrolled in course_id 2 (Data Manipulation)
-        cursor.execute("SELECT * FROM enrollments WHERE id = ? AND course_id = ?", (id, 2))
+        # Check if user is enrolled in course_id 10(Data Manipulation)
+        cursor.execute("SELECT * FROM enrollments WHERE id = ? AND course_id = ?", (id, 10))
         enrollment = cursor.fetchone()
         if enrollment:
             enrolled = True  # User is enrolled
@@ -345,8 +334,8 @@ def Physics():
     if id:
         conn = get_db_connection()
         cursor = conn.cursor()
-        # Check if user is enrolled in course_id 2 (Data Manipulation)
-        cursor.execute("SELECT * FROM enrollments WHERE id = ? AND course_id = ?", (id, 2))
+        # Check if user is enrolled in course_id 11 (Data Manipulation)
+        cursor.execute("SELECT * FROM enrollments WHERE id = ? AND course_id = ?", (id, 11))
         enrollment = cursor.fetchone()
         if enrollment:
             enrolled = True  # User is enrolled
@@ -434,7 +423,43 @@ def enroll():
                                 course_cost=course_cost, 
                                 course_duration=course_duration))
     else:
-        return redirect(url_for('data_manipulation' if course_id == 2 else 'courses'))  # Adjust based on your logic
+        return redirect(url_for('data_manipulation' if course_id == 10 else 'courses'))  # Adjust based on your logic
+    
+@app.route('/certificate', methods=["GET"])
+def certificate():
+    username = session.get("username")
+
+    if not username:
+        return "User not logged in.", 400
+
+    # Connect to the database
+    conn = get_db_connection()
+    conn.row_factory = sqlite3.Row  # Ensure dictionary-style row access
+    cursor = conn.cursor()
+
+    # Fetch the latest purchased course for the user
+    cursor.execute("""
+        SELECT course_name 
+        FROM enrollments 
+        WHERE username = ? 
+        LIMIT 1
+    """, (username,))
+    
+    course_data = cursor.fetchone()
+    conn.close()
+
+    if not course_data:
+        return "No course found for this user.", 400
+
+    # Extract course name correctly
+    course_name = course_data["course_name"]  # Access by column name
+    completion_date = datetime.now().strftime("%Y-%m-%d")  # Use today's date
+
+    return render_template('certificate.html', 
+                           username=username, 
+                           course_name=course_name, 
+                           completion_date=completion_date)
+
 
 @app.route('/payment', methods=['GET', 'POST'])
 def payment():
@@ -565,6 +590,13 @@ def invoice():
 
         if course_data:
             course_name, course_cost, course_duration = course_data
+            
+        # Save invoice details in session for later use in certificate
+        session['certificate_data'] = {
+            'username': username,
+            'course_name': course_name,
+            'purchase_date': purchase_date
+        }
 
     return render_template('invoice.html', 
                            course_name=course_name, 
