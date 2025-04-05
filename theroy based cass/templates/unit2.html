@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 2: Handling Missing Data</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>Unit 2: Handling Missing Data</h1>
+    </header>
+
+    <!-- Content Section -->
+    <section id="content">
+        <h2>Understanding Missing Data</h2>
+        <p>Missing data occurs when no value is stored for a variable in an observation. In real-world datasets, missing data is common due to various reasons, such as errors in data collection, technical issues, or even intentional gaps in the dataset. Missing data can have a significant impact on analysis, so understanding how to handle it properly is essential. In this unit, we will explore different types of missing data and strategies for dealing with it.</p>
+        
+        <h3>Types of Missing Data</h3>
+        <p>When dealing with missing data, it is important to first understand the nature of the missingness. Missing data can be classified into three main categories:</p>
+        
+        <ul>
+            <li><strong>MCAR (Missing Completely at Random):</strong> Missing Completely at Random (MCAR) refers to a situation where the occurrence of missing data is entirely independent of both the observed and unobserved data. In other words, the missing values in your dataset have no relationship whatsoever with the data present in the dataset or the data that is missing. An example would be a case where survey respondents accidentally skip a question due to a technical issue, and this missingness is completely unrelated to the respondent’s answers or characteristics.</li>
+            <li><strong>MAR (Missing at Random):</strong> Missing at Random (MAR) is a type of missing data where the probability of data being missing is related to the observed data but not the missing data itself. In other words, the reason why data is missing can be explained by other variables in the dataset that are observed, but it has no relationship with the value of the missing data. For example, if older respondents are more likely to skip a question about income, the data can be considered Missing at Random (MAR) because the missingness can be explained by the age variable, but not by the income itself.</li>
+            <li><strong>MNAR (Missing Not at Random):</strong> Missing Not at Random (MNAR) refers to a situation where the likelihood of data being missing is directly related to the value of the missing data itself. In other words, the missingness is not random but depends on the value of the variable that is missing, which makes it the most problematic type of missing data. An example would be people with higher incomes choosing not to report their income, leading to the missingness being directly related to the income values themselves.</li>
+        </ul>
+
+        <h3>Strategies for Handling Missing Data</h3>
+        <p>There are several strategies for dealing with missing data, depending on the type of missingness and the analysis requirements. Below are some of the most commonly used methods:</p>
+
+        <ul>
+            <li><strong>Deletion Methods:</strong> Deletion methods are techniques used to handle missing data by removing rows or columns that contain missing values from the dataset. These methods are generally simple to implement but may result in the loss of valuable information, especially when a significant amount of data is missing. There are two main types of deletion methods:
+                <ul>
+                    <li><strong>Listwise Deletion:</strong> This method removes any rows with missing values for any variable in the dataset. While it is simple to use, it can lead to a substantial loss of data if many rows have missing values, potentially leading to biased results.</li>
+                    <li><strong>Pairwise Deletion:</strong> In contrast, pairwise deletion removes only the rows with missing data for the variables involved in a particular analysis. This method retains more data than listwise deletion but may still result in biases if the missing data is not missing at random.</li>
+                </ul>
+            </li>
+            
+            <li><strong>Imputation Methods:</strong> Imputation methods are techniques used to replace missing values in a dataset with substituted values, ensuring that no data is lost and enabling more comprehensive analysis. These methods aim to estimate and fill in the missing data points based on the available observed data, preserving the dataset’s integrity while minimizing the risk of bias introduced by missing values. Imputation methods can vary in complexity:
+                <ul>
+                    <li><strong>Mean/Median Imputation:</strong> The simplest form of imputation involves replacing missing values with the mean or median of the observed values in a particular column. While it is computationally simple, it assumes that the missing data is missing at random and may not be appropriate for all datasets.</li>
+                    <li><strong>Regression Imputation:</strong> This method involves using regression models to predict missing values based on observed values of other variables in the dataset. For example, a linear regression model can be used to predict missing income values based on age, education, and other demographic factors.</li>
+                    <li><strong>Multiple Imputation:</strong> Multiple imputation is a more advanced technique that creates several imputed datasets based on the observed data, performs analysis on each dataset, and then combines the results. This method accounts for the uncertainty inherent in imputation and provides more reliable results than single imputation methods.</li>
+                    <li><strong>KNN Imputation:</strong> The K-nearest neighbors (KNN) algorithm can be used to impute missing data by considering the values of the nearest data points. This method is particularly useful when the data exhibits non-linear relationships between variables.</li>
+                </ul>
+            </li>
+            
+            <li><strong>Model-Based Methods:</strong> Model-based methods involve using statistical models to predict and estimate the missing values in a dataset. These methods take into account the relationships between the observed and missing data, attempting to infer the missing values based on these relationships. They are often more sophisticated than simpler imputation techniques and can provide more accurate imputations when the missingness is not completely random:
+                <ul>
+                    <li><strong>Expectation-Maximization (EM) Algorithm:</strong> The EM algorithm is a statistical method for estimating missing data in datasets with complex relationships. It iterates between estimating the missing values (expectation step) and optimizing the parameters of a statistical model (maximization step) to find the most likely values for the missing data.</li>
+                    <li><strong>Bayesian Methods:</strong> Bayesian methods use prior distributions and observed data to estimate missing values. By incorporating prior knowledge and using a probabilistic approach, Bayesian methods can provide more accurate imputations and quantify uncertainty about the missing data.</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h3>Example: Imputing Missing Values</h3>
+        <p>For a column with missing values, you can replace the missing data with the mean or median of that column. Let’s walk through an example to understand how missing values can be imputed in a dataset using various methods. We'll use a small dataset for this purpose and demonstrate different imputation techniques such as mean imputation, regression imputation, and multiple imputation.</p>
+
+        <p>Consider the following small dataset of individuals' ages and their corresponding incomes:</p>
+        <pre>
+        Age: [25, 30, 35, 40, 45, NaN, 55, 60, NaN]
+        Income: [50000, 60000, 70000, 80000, NaN, 100000, 120000, 130000, 140000]
+        </pre>
+
+        <h4>1. Mean Imputation:</h4>
+        <p>For the missing income values, we calculate the mean of the observed incomes:</p>
+        <pre>
+        Mean Income = (50000 + 60000 + 70000 + 80000 + 100000 + 120000 + 130000 + 140000) / 8 = 87,500
+        </pre>
+        <p>We can replace the missing income values with 87,500.</p>
+
+        <h4>2. Regression Imputation:</h4>
+        <p>In regression imputation, we use the relationship between age and income to predict the missing income values. For instance, we might use a linear regression model to predict missing income values based on age. The model might yield an equation like:</p>
+        <pre>
+        Income = 2000 * Age + 5000
+        </pre>
+        <p>Using this model, we can predict the missing income values for ages 45 and 60.</p>
+
+        <h4>3. Multiple Imputation:</h4>
+        <p>Multiple imputation involves generating several possible imputed values for each missing entry, based on observed data and model assumptions. The imputed values are treated as different plausible values and analyzed together.</p>
+
+        <h3>Choosing the Right Method</h3>
+        <p>Choosing the right method for handling missing data depends on several factors, including the type of missingness, the amount of missing data, and the intended analysis. It is crucial to carefully assess the nature of the missing data before deciding on an imputation or deletion strategy. In some cases, you may need to combine multiple methods to handle different types of missingness in the dataset.</p>
+
+        <a href="/templates/index.html" class="unit-button">Back to Course Overview</a>
+        <a href="/templates/unit1.html" class="unit-button">Previous</a> 
+        <a href="/templates/unit3.html" class="unit-button">Next</a> 
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2025 Learning Platform. All rights reserved.</p>
+    </footer>
+</body>
+</html>
